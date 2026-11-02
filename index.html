@@ -7,8 +7,8 @@
 <meta name="description" content="Smart Exam Academy: Class 10th, 12th, BA, B.Sc, B.Com और Competitive Exams के लिए free notes, video lectures, MCQ, question bank और mock tests.">
 <meta property="og:title" content="Smart Exam Academy">
 <meta property="og:description" content="Class 10th, 12th, BA, B.Sc, B.Com और Competitive Exams की पढ़ाई एक जगह।">
-<meta property="og:image" content="logo.png">
-<link rel="icon" href="logo.png">
+<meta property="og:image" content="sea-logo.png">
+<link rel="icon" href="sea-logo.png">
 <meta name="theme-color" content="#1d4ed8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -83,7 +83,7 @@ footer{text-align:center;color:var(--mu);font-size:12px;padding:24px 14px;line-h
 </head>
 <body>
 <header><div class="hd">
- <div class="brand" onclick="nav('')"><img src="logo.png" alt=""><div><b>Smart Exam Academy</b><small>Student Learning Portal</small></div></div>
+ <div class="brand" onclick="nav('')"><img src="sea-logo.png" alt=""><div><b>Smart Exam Academy</b><small>Student Learning Portal</small></div></div>
  <div class="search"><i class="fas fa-search"></i><input id="q1" placeholder="Notes, videos, MCQ खोजें..." oninput="onSearch(this.value)"></div>
  <div style="flex:1" class="sp"></div>
  <button class="hbtn" id="userBtn" onclick="userClick()"><i class="fas fa-user"></i><span>Student Login</span></button>
@@ -156,7 +156,7 @@ function vHome(){
  const mats=visMat(),chs=visCh();
  const loose=mats.filter(m=>(m.courseId||m.cat)===route.c&&!subs.some(s=>s.id===m.subjectId));
  return `<div class="hero"><div style="flex:1"><h1>पढ़ाई अब आसान 📚</h1><p>Class 10th, 12th, BA, B.Sc, B.Com और Competitive Exams के notes, video lectures, MCQ और mock tests — सब एक जगह।</p>
- <div class="st"><div><b>${visSub().length}</b><span>Subjects</span></div><div><b>${chs.length}</b><span>Chapters</span></div><div><b>${mats.length}</b><span>Study Materials</span></div></div></div><img src="logo.png" alt="Smart Exam Academy"></div>
+ <div class="st"><div><b>${visSub().length}</b><span>Subjects</span></div><div><b>${chs.length}</b><span>Chapters</span></div><div><b>${mats.length}</b><span>Study Materials</span></div></div></div><img src="sea-logo.png" alt="Smart Exam Academy"></div>
  ${courseBar()}
  <div class="crumb"><i class="fas fa-house"></i> ${esc(cName(route.c))}</div>
  <h2 class="t"><i class="fas fa-book-open-reader" style="color:var(--p2)"></i> Subjects in ${esc(cName(route.c))}</h2><div class="sub">कोई subject चुनें — chapters, video lectures, notes और tests देखें।</div>
