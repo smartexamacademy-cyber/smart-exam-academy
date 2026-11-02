@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <style>
 :root{--p:#1d4ed8;--p2:#2563eb;--bg:#f4f6fb;--card:#fff;--tx:#1f2937;--mu:#6b7280;--bd:#e5e7eb}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -210,15 +211,20 @@ function openLogin(msg,reg){openM(`<div class="form"><div style="display:flex;al
  ${reg?`<label>Course</label><select id="rC">${COURSES.slice(0,6).map(c=>`<option value="${c.id}" ${c.id===route.c?'selected':''}>${c.name}</option>`).join('')}</select>`:''}
  <div class="err" id="lErr"></div><button class="btn" style="width:100%;justify-content:center;margin-top:14px">${reg?'Register':'Login'}</button></form>
  <p style="text-align:center;margin-top:12px;font-size:13px">${reg?'पहले से account है? <a style="color:var(--p2);cursor:pointer" onclick="openLogin()">Login</a>':'नया student? <a style="color:var(--p2);cursor:pointer" onclick="openLogin(\'\',true)">Register करें</a>'}</p></div>`);}
-async function findStudent(email){const s=await db.ref('students_v3').orderByChild('email').equalTo(email).once('value');let r=null;s.forEach(c=>{r={id:c.key,...c.val()};});
- if(!r){const all=await db.ref('students_v3').once('value');all.forEach(c=>{const v=c.val();if(v&&(v.email||'').toLowerCase()===email)r={id:c.key,...v};});}return r;}
+const skey=e=>e.toLowerCase().trim().replace(/\./g,',');
+async function findStudent(email){const s=await db.ref('students_v3/'+skey(email)).once('value');return s.exists()?{id:s.key,...s.val()}:null;}
+function setMe(id,n,em,c){me={id,name:n||em,email:em,cat:c||''};localStorage.setItem('sea_student',JSON.stringify(me));closeM();render();}
 async function doLogin(e){e.preventDefault();const em=$('lE').value.trim().toLowerCase(),p=$('lP').value;$('lErr').textContent='';
- try{const u=await findStudent(em);if(u&&u.pass===p){me={id:u.id,name:u.name||em,email:em,cat:u.cat||''};localStorage.setItem('sea_student',JSON.stringify(me));closeM();render();}else $('lErr').textContent='गलत email या password';}
+ try{let ok=false;try{await firebase.auth().signInWithEmailAndPassword(em,p);ok=true;}catch(x){}
+  const u=await findStudent(em);
+  if(!ok&&u&&u.pass===p){ok=true;if(p.length>=6){try{await firebase.auth().createUserWithEmailAndPassword(em,p);}catch(x){}}}
+  if(ok)setMe(skey(em),u&&u.name,em,u&&(u.cat||u.course));else $('lErr').textContent='गलत email या password';}
  catch(err){$('lErr').textContent='Login नहीं हो पाया, फिर कोशिश करें';}}
 async function doReg(e){e.preventDefault();const n=$('rN').value.trim(),em=$('lE').value.trim().toLowerCase(),p=$('lP').value,c=$('rC').value;$('lErr').textContent='';
  try{if(await findStudent(em)){$('lErr').textContent='यह email पहले से registered है — Login करें';return;}
-  const r=await db.ref('students_v3').push({name:n,email:em,pass:p,cat:c,score:0,registered:new Date().toISOString()});
-  me={id:r.key,name:n,email:em,cat:c};localStorage.setItem('sea_student',JSON.stringify(me));closeM();render();}
+  let uid='';try{const r=await firebase.auth().createUserWithEmailAndPassword(em,p);uid=r.user.uid;}catch(x){if(x&&x.code==='auth/email-already-in-use'){$('lErr').textContent='यह email पहले से registered है — Login करें';return;}}
+  await db.ref('students_v3/'+skey(em)).set({name:n,email:em,pass:p,cat:c,course:c,score:0,uid:uid,registered:new Date().toISOString()});
+  setMe(skey(em),n,em,c);}
  catch(err){$('lErr').textContent='Registration नहीं हो पाया';}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 </script>
