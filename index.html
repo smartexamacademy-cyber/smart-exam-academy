@@ -72,6 +72,8 @@ h2.t{font-size:20px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .err{color:#dc2626;font-size:13px;margin-top:8px}
 .app{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;border-radius:16px;padding:22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .app h3{font-size:18px;margin-bottom:4px}.app p{opacity:.85;font-size:13px}
+.wa{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #bbf7d0;border-radius:14px;padding:14px 16px}.wa>i{font-size:34px;color:#25D366}.wa b{display:block;font-size:15px}.wa span{font-size:12px;color:var(--mu)}.wa .wbtn{background:#25D366;color:#fff;font-weight:700;font-size:13px;padding:8px 16px;border-radius:20px}
+.fwa{position:fixed;right:16px;bottom:16px;width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:40}
 footer{text-align:center;color:var(--mu);font-size:12px;padding:24px 14px;line-height:1.8}footer a{color:var(--p2)}
 #loading{text-align:center;padding:60px;color:var(--mu)}
 @media(max-width:700px){.search{display:none}.hero{padding:20px 16px}.hero img{display:none}.hero h1{font-size:20px}.brand small{display:none}.hbtn span{display:none}}
@@ -93,8 +95,9 @@ footer{text-align:center;color:var(--mu);font-size:12px;padding:24px 14px;line-h
 </div>
 <footer>
  <b>Smart Exam Academy</b> © <span id="yr"></span> — All Rights Reserved<br>
- <a href="https://smartexamacademy.blogspot.com/2026/01/terms-conditions.html" target="_blank" rel="noopener">Privacy Policy & Terms</a> · <a href="mailto:sonukumarbank9876@gmail.com">Contact</a>
+ <a href="https://smartexamacademy.blogspot.com/2026/01/terms-conditions.html" target="_blank" rel="noopener">Privacy Policy & Terms</a> · <a href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a> · <a href="mailto:sonukumarbank9876@gmail.com">Contact</a>
 </footer>
+<a class="fwa" href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener" aria-label="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
 <div class="modal" id="modal" onclick="if(event.target===this)closeM()"><div class="mb" id="mBody"></div></div>
 
 <script>
@@ -160,6 +163,7 @@ function vHome(){
  <div class="grid">${subs.map((s,i)=>{const nc=chs.filter(c=>c.subjectId===s.id).length,nm=mats.filter(m=>m.subjectId===s.id).length;
   return `<div class="sc" onclick="nav('${route.c}/${s.id}')"><div class="ic" style="background:${COLORS[i%COLORS.length]}"><i class="fas fa-book"></i></div><b>${esc(s.name)}</b><div class="m"><i class="fas fa-list"></i> ${nc} Chapters · <i class="fas fa-file"></i> ${nm} Materials</div><div class="go"><span>Open Subject</span><i class="fas fa-arrow-right"></i></div></div>`;}).join('')||'<div class="empty" style="grid-column:1/-1">इस course में जल्द ही subjects आएँगे।</div>'}</div>
  ${loose.length?`<h2 class="t" style="margin-top:20px"><i class="fas fa-folder-open" style="color:var(--p2)"></i> Other Materials</h2><div class="sub">&nbsp;</div><div class="chap open"><div class="b">${loose.map(matRow).join('')}</div></div>`:''}
+ ${socialCard()}
  ${appCard()}`;
 }
 function vSubject(){
@@ -179,6 +183,8 @@ function vSearch(){const k=q.toLowerCase();const L=visMat().filter(m=>[mTitle(m)
  return `<h2 class="t"><i class="fas fa-search" style="color:var(--p2)"></i> "${esc(q)}" के results (${L.length})</h2><div class="sub">&nbsp;</div><div class="chap open"><div class="b">${L.map(m=>matRow(m,true)).join('')||'<div class="empty">कुछ नहीं मिला</div>'}</div></div>`;}
 function matRow(m,showPath){const t=T(m.type),p=acc(m)==='premium';
  return `<div class="mat" onclick="openMat('${m.id}')"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(mTitle(m))}</b><small>${t[0]}${showPath?' · '+esc((m.courseId||m.cat)+' → '+(m.sub||'')):''}${m.date?' · '+esc(m.date):''}</small></div>${p?'<span class="tag prem"><i class="fas fa-crown"></i> Premium</span>':''}<i class="fas fa-chevron-right" style="color:var(--mu)"></i></div>`;}
+function socialCard(){return `<h2 class="t" style="margin-top:22px"><i class="fas fa-share-nodes" style="color:var(--p2)"></i> Social</h2><div class="sub">नए notes, videos और updates सबसे पहले पाने के लिए जुड़िए।</div>
+ <a class="wa" href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><div style="flex:1"><b>WhatsApp Channel</b><span>Smart Exam Academy को follow करें</span></div><span class="wbtn">Join</span></a>`;}
 function appCard(){return `<div class="app" style="margin-top:20px"><i class="fas fa-mobile-screen-button" style="font-size:38px"></i><div style="flex:1;min-width:200px"><h3>Smart Exam Academy App</h3><p>Android app PhonePe App Store पर उपलब्ध है — "Smart Exam Academy" search करें।</p></div></div>`;}
 
 // ---------- material viewer ----------
