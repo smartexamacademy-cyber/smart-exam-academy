@@ -3,11 +3,13 @@
 Polls Razorpay for payments made from the app (notes.uid + notes.courseId),
 checks amount against paid_courses_v3/{courseId}/price, captures if needed,
 then writes enrollments_v3/{uid}/{courseId} and marks the purchase request approved.
-Env: RZP_KEY_ID, RZP_KEY_SECRET, FB_DB_SECRET, RUN_MINUTES (default 345), POLL_SECONDS (15)."""
+Env: RZP_KEY_ID, RZP_KEY_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD, RUN_MINUTES (default 345), POLL_SECONDS (15)."""
 import base64, json, os, sys, time, urllib.request, urllib.parse, urllib.error
 
 DB = "https://smart-exam-academy-b7101-default-rtdb.firebaseio.com"
-KID, KSEC, FBS = os.environ["RZP_KEY_ID"].strip(), os.environ["RZP_KEY_SECRET"].strip(), os.environ["FB_DB_SECRET"].strip()
+KID, KSEC = os.environ["RZP_KEY_ID"].strip(), os.environ["RZP_KEY_SECRET"].strip()
+ADMIN_EMAIL, ADMIN_PASS = os.environ.get("ADMIN_EMAIL", "").strip(), os.environ.get("ADMIN_PASSWORD", "")
+WEB_KEY = "AIzaSyAmBGqLzAyMyYgADKOOZIv8GQm6fxxNdw4"  # public Firebase web API key
 RUN = int(os.environ.get("RUN_MINUTES", "345")) * 60
 POLL = int(os.environ.get("POLL_SECONDS", "15"))
 AUTH = "Basic " + base64.b64encode(f"{KID}:{KSEC}".encode()).decode()
@@ -22,8 +24,17 @@ def http(method, url, body=None, headers=None):
 def rzp(method, path, body=None):
     return http(method, "https://api.razorpay.com/v1" + path, body, {"Authorization": AUTH})
 
+_tok = {"id": None, "exp": 0}
+def token():
+    """Admin Firebase Auth ID token (rules give this uid full access); refreshed every ~50 min."""
+    if _tok["id"] and time.time() < _tok["exp"]: return _tok["id"]
+    r = http("POST", "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + WEB_KEY,
+             {"email": ADMIN_EMAIL, "password": ADMIN_PASS, "returnSecureToken": True})
+    _tok["id"], _tok["exp"] = r["idToken"], time.time() + int(r.get("expiresIn", "3600")) - 600
+    return _tok["id"]
+
 def fb(method, path, body=None, query=""):
-    q = "auth=" + urllib.parse.quote(FBS) + (("&" + query) if query else "")
+    q = "auth=" + urllib.parse.quote(token()) + (("&" + query) if query else "")
     return http(method, f"{DB}/{path}.json?{q}", body)
 
 def log(*a): print(time.strftime("%H:%M:%S"), *a, flush=True)
@@ -77,7 +88,7 @@ def handle(p):
 def main():
     # sanity checks (no secrets printed)
     rzp("GET", "/payments?count=1"); log("razorpay ok", KID[:9])
-    fb("GET", "paid_courses_v3", query="shallow=true"); fb("GET", "razorpay_payments", query="shallow=true"); log("firebase ok")
+    fb("GET", "paid_courses_v3", query="shallow=true"); fb("GET", "enrollments_v3", query="shallow=true"); log("firebase ok")
     end = time.time() + RUN
     since = int(time.time()) - 3 * 86400
     while time.time() < end:
