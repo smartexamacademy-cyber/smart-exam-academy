@@ -17,16 +17,21 @@ AUTH = "Basic " + base64.b64encode(f"{KID}:{KSEC}".encode()).decode()
 def http(method, url, body=None, headers=None):
     data = json.dumps(body).encode() if body is not None else None
     req = urllib.request.Request(url, data=data, method=method, headers={"Content-Type": "application/json", **(headers or {})})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        t = r.read().decode()
-        return json.loads(t) if t else None
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            t = r.read().decode()
+            return json.loads(t) if t else None
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"HTTP {e.code} {url.split('?')[0]} {e.read().decode()[:200]}") from None
 
 def rzp(method, path, body=None):
     return http(method, "https://api.razorpay.com/v1" + path, body, {"Authorization": AUTH})
 
 _tok = {"id": None, "exp": 0}
+FBS = os.environ.get("FB_DB_SECRET", "").strip()
 def token():
-    """Admin Firebase Auth ID token (rules give this uid full access); refreshed every ~50 min."""
+    """Database secret if set, else admin Firebase Auth ID token (refreshed every ~50 min)."""
+    if FBS: return FBS
     if _tok["id"] and time.time() < _tok["exp"]: return _tok["id"]
     r = http("POST", "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + WEB_KEY,
              {"email": ADMIN_EMAIL, "password": ADMIN_PASS, "returnSecureToken": True})
