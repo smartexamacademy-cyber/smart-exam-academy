@@ -1,0 +1,17 @@
+name: DB patch (admin)
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "Patch file in repo"
+        required: true
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply
+        env:
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: python3 tools/db_patch.py "${{ github.event.inputs.file }}"
