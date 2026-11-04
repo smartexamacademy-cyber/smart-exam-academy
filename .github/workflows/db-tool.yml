@@ -1,0 +1,17 @@
+name: DB tool (admin)
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "Ops file in repo"
+        required: true
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run
+        env:
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: python3 tools/db_tool.py "${{ github.event.inputs.file }}"
