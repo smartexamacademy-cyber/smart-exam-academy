@@ -20,6 +20,7 @@ jobs:
         env:
           RZP_KEY_ID: ${{ secrets.RZP_KEY_ID }}
           RZP_KEY_SECRET: ${{ secrets.RZP_KEY_SECRET }}
+          FB_DB_SECRET: ${{ secrets.FB_DB_SECRET }}
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           RUN_MINUTES: ${{ github.event.inputs.minutes || '345' }}
