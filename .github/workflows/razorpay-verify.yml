@@ -1,0 +1,25 @@
+name: Razorpay auto verify
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "How long to keep polling"
+        default: "345"
+concurrency:
+  group: razorpay-verify
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - name: Poll Razorpay and unlock courses
+        env:
+          RZP_KEY_ID: ${{ secrets.RZP_KEY_ID }}
+          RZP_KEY_SECRET: ${{ secrets.RZP_KEY_SECRET }}
+          FB_DB_SECRET: ${{ secrets.FB_DB_SECRET }}
+          RUN_MINUTES: ${{ github.event.inputs.minutes || '345' }}
+        run: python3 tools/rzp_verify.py
