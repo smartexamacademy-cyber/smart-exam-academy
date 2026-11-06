@@ -240,17 +240,16 @@ const skey=e=>e.toLowerCase().trim().replace(/\./g,',');
 async function findStudent(email){const s=await db.ref('students_v3/'+skey(email)).once('value');return s.exists()?{id:s.key,...s.val()}:null;}
 function setMe(id,n,em,c){me={id,name:n||em,email:em,cat:c||''};localStorage.setItem('sea_student',JSON.stringify(me));closeM();render();}
 async function doLogin(e){e.preventDefault();const em=$('lE').value.trim().toLowerCase(),p=$('lP').value;$('lErr').textContent='';
- try{let ok=false;try{await firebase.auth().signInWithEmailAndPassword(em,p);ok=true;}catch(x){}
-  const u=await findStudent(em);
-  if(!ok&&u&&u.pass===p){ok=true;if(p.length>=6){try{await firebase.auth().createUserWithEmailAndPassword(em,p);}catch(x){}}}
-  if(ok)setMe(skey(em),u&&u.name,em,u&&(u.cat||u.course));else $('lErr').textContent='गलत email या password';}
- catch(err){$('lErr').textContent='Login नहीं हो पाया, फिर कोशिश करें';}}
+ try{await firebase.auth().signInWithEmailAndPassword(em,p);}
+ catch(x){const c=x&&x.code||'';$('lErr').textContent=/network/.test(c)?'Internet check करें, फिर कोशिश करें':/too-many/.test(c)?'बहुत ज़्यादा कोशिश हुई, थोड़ी देर बाद login करें':'गलत email या password';return;}
+ let u=null;try{u=await findStudent(em);}catch(x){}
+ setMe(skey(em),u&&u.name,em,u&&(u.cat||u.course));}
 async function doReg(e){e.preventDefault();const n=$('rN').value.trim(),em=$('lE').value.trim().toLowerCase(),p=$('lP').value,c=$('rC').value;$('lErr').textContent='';
- try{if(await findStudent(em)){$('lErr').textContent='यह email पहले से registered है — Login करें';return;}
-  let uid='';try{const r=await firebase.auth().createUserWithEmailAndPassword(em,p);uid=r.user.uid;}catch(x){if(x&&x.code==='auth/email-already-in-use'){$('lErr').textContent='यह email पहले से registered है — Login करें';return;}}
-  await db.ref('students_v3/'+skey(em)).set({name:n,email:em,pass:p,cat:c,course:c,score:0,uid:uid,registered:new Date().toISOString()});
-  setMe(skey(em),n,em,c);}
- catch(err){$('lErr').textContent='Registration नहीं हो पाया';}}
+ let uid='';
+ try{const r=await firebase.auth().createUserWithEmailAndPassword(em,p);uid=r.user.uid;}
+ catch(x){const k=x&&x.code||'';$('lErr').textContent=k==='auth/email-already-in-use'?'यह email पहले से registered है — Login करें':k==='auth/weak-password'?'Password कम से कम 6 अक्षर का हो':k==='auth/invalid-email'?'सही email डालें':'Registration नहीं हो पाया';return;}
+ try{await db.ref('students_v3/'+skey(em)).update({name:n,email:em,cat:c,course:c,score:0,uid:uid,registered:new Date().toISOString()});}catch(err){}
+ setMe(skey(em),n,em,c);}
 // ---------- Premium Courses (paid, UPI + verification) — student side only ----------
 const P={courses:[],loaded:false,denied:false,cfg:{},user:null,authReady:false,enr:{},req:[],enrDenied:false,content:{},refs:[]};
 const PAY_DEFAULT={upiId:'7009466362@ibl',payeeName:'Sonu Kumar'};
