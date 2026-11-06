@@ -42,7 +42,24 @@ def fb(method, path, body=None, query=""):
     q = "auth=" + urllib.parse.quote(token()) + (("&" + query) if query else "")
     return http(method, f"{DB}/{path}.json?{q}", body)
 
-def log(*a): print(time.strftime("%H:%M:%S"), *a, flush=True)
+import re
+_MASK_RES = [
+    re.compile(r"(pay_|order_)([A-Za-z0-9]{4})[A-Za-z0-9]+"),          # Razorpay ids
+    re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"),       # emails
+    re.compile(r"\+?\d[\d -]{7,}\d"),                                   # phone numbers
+]
+def mask(v):
+    """Public Actions logs: never print full uid / email / contact / payment id."""
+    s = str(v)
+    s = _MASK_RES[0].sub(lambda m: m.group(1) + m.group(2) + "***", s)
+    s = _MASK_RES[1].sub(lambda m: m.group(0)[:4] + "***", s)
+    s = _MASK_RES[2].sub(lambda m: m.group(0)[:4] + "***", s)
+    for u in list(_SENSITIVE):
+        if u and u in s: s = s.replace(u, u[:4] + "***")
+    return s
+_SENSITIVE = set()
+
+def log(*a): print(time.strftime("%H:%M:%S"), *[mask(x) for x in a], flush=True)
 
 done = set()
 
@@ -52,6 +69,7 @@ def handle(p):
     notes = p.get("notes") or {}
     if isinstance(notes, list): notes = {}
     uid, cid = str(notes.get("uid", "")).strip(), str(notes.get("courseId", "")).strip()
+    if uid: _SENSITIVE.add(uid)
     if not uid or not cid or "/" in uid + cid or "." in uid + cid:
         done.add(pid); return
     if p.get("status") not in ("authorized", "captured"):
