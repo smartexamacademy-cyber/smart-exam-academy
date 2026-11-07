@@ -1,0 +1,28 @@
+[
+ {
+  "op": "patch",
+  "data": {
+   "paid_courses_v3/ba-sem2-complete/active": false,
+   "paid_courses_v3/ba-sem4-complete/active": false,
+   "paid_courses_v3/ba-sem5-complete/active": false,
+   "paid_courses_v3/ba-sem6-complete/active": false,
+   "paid_courses_v3/competition-complete/active": false,
+   "paid_courses_v3/free-ba-sem2/active": false,
+   "paid_courses_v3/free-ba-sem3/active": false,
+   "paid_courses_v3/free-ba-sem4/active": false,
+   "paid_courses_v3/free-ba-sem5/active": false,
+   "paid_courses_v3/free-ba-sem6/active": false,
+   "paid_courses_v3/free-competition/active": false,
+   "enrollments_v3/HrL3ZejoWQel3aiTXR03jeVYRnA3/-P5TvWZhpaqhlQoi-4_w": {
+    "approvedAt": 1794014874474,
+    "expiresAt": 1820280474474,
+    "source": "admin_free",
+    "grantedBy": "admin (Hark, store review prep)",
+    "note": "PhonePe App Store reviewer demo access",
+    "courseTitle": "BA 3rd Semester Complete Course (MCQ Videos + PDF Notes)",
+    "email": "reviewer@demo.com",
+    "name": "PhonePe Reviewer"
+   }
+  }
+ }
+]
