@@ -26,5 +26,17 @@ for o in ops:
                 if "sub" in it: upd[f"paid_content_v3/{o['course']}/{k}/sub"] = None
         if upd: v.fb("PATCH", "", upd)
         print("REMAPPED", o["course"], len(upd))
+    elif o["op"] == "review":
+        # read-only report for store review prep: counts only, no links / emails printed
+        pc = v.fb("GET", "paid_courses_v3", query="shallow=true") or {}
+        for cid in sorted(pc):
+            items = v.fb("GET", f"paid_content_v3/{cid}", query="shallow=true") or {}
+            print("PAIDCOUNT", cid, len(items))
+        en_all = v.fb("GET", "enrollments_v3") or {}
+        per = collections.Counter(c for u in en_all.values() if isinstance(u, dict) for c in u)
+        print("ENROLLCOUNT", json.dumps(per, ensure_ascii=False))
+        for u in o.get("uids", []):
+            e = v.fb("GET", f"enrollments_v3/{u}") or {}
+            print("REVIEWER_ENROLL", json.dumps({k: {"source": x.get("source"), "expiresAt": x.get("expiresAt"), "approvedAt": x.get("approvedAt")} for k, x in e.items() if isinstance(x, dict)}))
     elif o["op"] == "patch":
         v.fb("PATCH", "", o["data"]); print("PATCHED", len(o["data"]))
