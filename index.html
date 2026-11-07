@@ -14,7 +14,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
 :root{--p:#1d4ed8;--p2:#2563eb;--bg:#f4f6fb;--card:#fff;--tx:#1f2937;--mu:#6b7280;--bd:#e5e7eb}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -95,11 +94,23 @@ footer{text-align:center;color:var(--mu);font-size:12px;padding:24px 14px;line-h
 .btn.buy{width:100%;justify-content:center;background:#16a34a;padding:13px 16px;font-size:15px}
 .sbox{display:flex;gap:12px;align-items:flex-start;border-radius:12px;padding:12px 14px;margin-bottom:10px}.sbox>i{font-size:22px;margin-top:2px}.sbox b{display:block}.sbox span{display:block;font-size:13px;margin-top:3px}
 .sbox.ok{background:#dcfce7;color:#166534}.sbox.pend{background:#fef3c7;color:#92400e}.sbox.rej{background:#fee2e2;color:#991b1b}
-.paysum{display:flex;align-items:center;gap:10px;background:#f8fafc;border:1px solid var(--bd);border-radius:12px;padding:12px}.paysum b{flex:1}
-.upirow{display:flex;gap:10px;align-items:center;border:1px dashed #94a3b8;border-radius:12px;padding:10px 12px;margin:12px 0 6px;flex-wrap:wrap}.upirow small{display:block;color:var(--mu);font-size:11px}.upirow b{display:block;font-size:16px;word-break:break-all}
-.qrs{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:14px 0}.qrb{text-align:center;max-width:240px}.qrb img{width:220px;height:220px;object-fit:contain;border:1px solid var(--bd);border-radius:10px;background:#fff;image-rendering:pixelated}.qrb small{display:block;font-size:11px;color:var(--mu);margin-top:4px}
-.steps{background:#eff6ff;color:#1e3a8a;border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.7;white-space:pre-wrap}
 label.fl{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:10px 0 4px}
+.pstrip.fr{background:linear-gradient(90deg,#f0fdf4,#dcfce7);border-color:#86efac}.pstrip.fr>i{color:#16a34a}.pstrip.fr b{color:#14532d}.pstrip .wbtn{background:#1d4ed8;color:#fff;font-weight:700;font-size:12px;padding:7px 12px;border-radius:18px;white-space:nowrap}.pstrip.fr .wbtn{background:#16a34a}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.crs{background:var(--card);border:1px solid var(--bd);border-radius:14px;overflow:hidden;cursor:pointer;transition:.15s;display:flex;flex-direction:column}.crs:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,99,235,.13)}
+.cth{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#1d4ed8,#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;overflow:hidden}.cth img,.pdth img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cb{padding:12px 14px;display:flex;flex-direction:column;flex:1}.cb>b{font-size:15px;line-height:1.35;margin-bottom:3px}
+.valid{display:inline-flex;gap:6px;align-items:center;background:#fef3c7;color:#92400e;font-weight:800;font-size:11px;letter-spacing:.3px;border-radius:7px;padding:4px 9px;margin-top:8px;align-self:flex-start}.valid.free{background:#dcfce7;color:#166534}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;font-size:12px}.feat i{color:#16a34a}
+.cbtn{display:flex;gap:8px;margin-top:auto;padding-top:12px}.btn.wide{flex:1;justify-content:center}.btn.dark{background:#111827}.btn.ol{background:#fff;color:#111827;border:1.5px solid #111827}.btn.sq{padding:11px 13px}
+.pdth{background:linear-gradient(135deg,#1d4ed8,#7c3aed)}.pdet.slim .pdth.sm{flex:0 0 200px;min-height:112px;font-size:30px}.pdet.slim .pdb{padding:14px}
+.pills{display:flex;gap:8px;margin:4px 0 12px;flex-wrap:wrap}.pills button{border:1px solid var(--bd);background:#fff;border-radius:20px;padding:7px 18px;font-weight:700;font-size:13px;color:var(--tx)}.pills button.on{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.fbar{position:sticky;bottom:10px;z-index:20;display:flex;gap:12px;align-items:center;background:#fff7ed;border:1px solid #fdba74;border-radius:14px;padding:10px 12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,.08)}.fbar b{display:block;font-size:14px;color:#7c2d12}.fbar span{font-size:12px;color:#9a3412}
+.gbtn{width:100%;display:flex;gap:10px;align-items:center;justify-content:center;border:1px solid var(--bd);background:#fff;border-radius:10px;padding:11px;font-weight:700;font-size:14px;color:#1f2937}
+.or{display:flex;align-items:center;gap:10px;color:var(--mu);font-size:12px;margin:12px 0 2px}.or:before,.or:after{content:"";flex:1;height:1px;background:var(--bd)}
+.afgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.af{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}.af .ic{width:40px;height:40px;border-radius:11px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}.af b{display:block;font-size:15px;margin-bottom:4px}.af p{font-size:12px;color:var(--mu);line-height:1.5}
+.wa.yt{border-color:#fecaca;margin-top:10px}.wa.yt>i{color:#FF0000}.wa.yt .wbtn{background:#FF0000}
+@media(max-width:600px){.pdet.slim .pdth.sm{flex:1 1 100%}.feat{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -107,7 +118,7 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:10p
  <div class="brand" onclick="nav('')"><img src="sea-logo.png" alt=""><div><b>Smart Exam Academy</b><small>Student Learning Portal</small></div></div>
  <div class="search"><i class="fas fa-search"></i><input id="q1" placeholder="Notes, videos, MCQ खोजें..." oninput="onSearch(this.value)"></div>
  <div style="flex:1" class="sp"></div>
- <button class="hbtn prm" onclick="nav('premium')"><i class="fas fa-crown"></i><span>Premium Courses</span></button>
+ <button class="hbtn prm" onclick="nav('premium')"><i class="fas fa-book-open"></i><span>Paid Course</span></button>
  <button class="hbtn" id="userBtn" onclick="userClick()"><i class="fas fa-user"></i><span>Student Login</span></button>
 </div></header>
 <div id="annBar"></div>
@@ -117,7 +128,7 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:10p
 </div>
 <footer>
  <b>Smart Exam Academy</b> © <span id="yr"></span> — All Rights Reserved<br>
- <a href="https://smartexamacademy.blogspot.com/2026/01/terms-conditions.html" target="_blank" rel="noopener">Privacy Policy & Terms</a> · <a href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a> · <a href="mailto:sonukumarbank9876@gmail.com">Contact</a>
+ <a href="privacy.html">Privacy Policy</a> · <a href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a> · <a href="https://youtube.com/@smartexamacademy" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a> · <a href="mailto:sonukumarhark@gmail.com">Contact</a>
 </footer>
 <a class="fwa" href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener" aria-label="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
 <div class="modal" id="modal" onclick="if(event.target===this)closeM()"><div class="mb" id="mBody"></div></div>
@@ -132,7 +143,7 @@ const COURSES=[{id:'12th',name:'Class 12th',ic:'fa-graduation-cap'},{id:'10th',n
 const TYPES={Notes:['Notes','fa-file-lines','#2196F3'],Videos:['Videos','fa-circle-play','#E91E63'],MCQ:['MCQ','fa-list-check','#00a844'],QuizTest:['Quiz','fa-circle-question','#FF9800'],Books:['Books','fa-book-open','#4CAF50'],QuestionBank:['Question Bank','fa-list-ol','#9C27B0'],Syllabus:['Syllabus','fa-clipboard-list','#00BCD4'],PDF:['PDF','fa-file-pdf','#F44336'],Link:['Link','fa-link','#607D8B'],LINK:['Link','fa-link','#607D8B'],Test:['Mock Test','fa-vial','#ff6d00'],Other:['Other','fa-folder','#795548']};
 const COLORS=['#2563eb','#059669','#ea580c','#7c3aed','#dc2626','#0284c7','#db2777','#4f46e5','#0d9488'];
 const S={subjects:[],chapters:[],materials:[],ann:[],loaded:0};
-let route={c:'12th',s:'',type:'',p:false,pc:''},q='',me=null;
+let route={c:'12th',s:'',type:'',p:false,pc:'',f:[]},q='',me=null;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const T=t=>TYPES[t]||TYPES.Other;
@@ -153,7 +164,7 @@ const visMat=()=>S.materials.filter(m=>m.published!==false);
 });
 
 // ---------- routing (#/12th/subjectId) ----------
-function readHash(){const p=location.hash.replace(/^#\/?/,'').split('/');route.c=COURSES.some(c=>c.id===decodeURIComponent(p[0]))?decodeURIComponent(p[0]):(localStorage.getItem('sea_course')||'12th');route.s=p[1]?decodeURIComponent(p[1]):'';route.p=p[0]==='premium';route.pc=route.p&&p[1]?decodeURIComponent(p[1]):'';if(route.p)route.s='';}
+function readHash(){const p=location.hash.replace(/^#\/?/,'').split('/');route.c=COURSES.some(c=>c.id===decodeURIComponent(p[0]))?decodeURIComponent(p[0]):(localStorage.getItem('sea_course')||'12th');route.s=p[1]?decodeURIComponent(p[1]):'';route.p=p[0]==='premium';route.pc=route.p&&p[1]?decodeURIComponent(p[1]):'';route.f=route.p?p.slice(2).filter(Boolean).map(decodeURIComponent):[];if(route.p)route.s='';}
 function nav(h){location.hash=h?'#/'+h:'#/'+route.c;}
 window.addEventListener('hashchange',()=>{readHash();route.type='';render();window.scrollTo(0,0);});
 readHash();
@@ -174,7 +185,7 @@ function annBar(){const L=[...S.ann].filter(a=>a.target!=='course_specific'||a.c
 function showAnn(){const L=[...S.ann].sort((a,b)=>new Date(b.timestamp||0)-new Date(a.timestamp||0));
  openM(`<div class="mh"><i class="fas fa-bullhorn" style="color:#f59e0b"></i><b>सूचनाएँ</b><button class="x" onclick="closeM()">×</button></div><div class="mbody">${L.map(a=>`<div style="padding:10px 0;border-bottom:1px solid var(--bd)"><b>${esc(a.title)}</b> ${a.priority==='urgent'?'<span class="tag" style="background:#fee2e2;color:#991b1b">Urgent</span>':''}<p style="margin-top:4px;white-space:pre-wrap">${esc(a.message)}</p><small style="color:var(--mu)">${a.timestamp?new Date(a.timestamp).toLocaleDateString('en-IN'):''}</small></div>`).join('')}</div>`);}
 
-function courseBar(){return `<div class="card"><div class="lbl"><i class="fas fa-layer-group"></i> Course / Class चुनें</div><div class="courses">${COURSES.filter(c=>c.id!=='SOCIAL_LINKS'||visMat().some(m=>(m.courseId||m.cat)==='SOCIAL_LINKS')).map(c=>`<button class="${c.id===route.c?'on':''}" onclick="localStorage.setItem('sea_course','${c.id}');nav('${c.id}')"><i class="fas ${c.ic}"></i> ${c.name}</button>`).join('')}<button class="pbtn" onclick="nav('premium')"><i class="fas fa-crown"></i> Premium Courses</button></div></div>`;}
+function courseBar(){return `<div class="card"><div class="lbl"><i class="fas fa-layer-group"></i> Course / Class चुनें</div><div class="courses">${COURSES.filter(c=>c.id!=='SOCIAL_LINKS'||visMat().some(m=>(m.courseId||m.cat)==='SOCIAL_LINKS')).map(c=>`<button class="${c.id===route.c?'on':''}" onclick="localStorage.setItem('sea_course','${c.id}');nav('${c.id}')"><i class="fas ${c.ic}"></i> ${c.name}</button>`).join('')}<button class="pbtn" onclick="nav('premium')"><i class="fas fa-book-open"></i> Paid & Free Courses</button></div></div>`;}
 function vHome(){
  const subs=visSub().filter(s=>s.courseId===route.c).sort((a,b)=>(a.order||0)-(b.order||0));
  const mats=visMat(),chs=visCh();
@@ -188,6 +199,7 @@ function vHome(){
  <div class="grid">${subs.map((s,i)=>{const nc=chs.filter(c=>c.subjectId===s.id).length,nm=mats.filter(m=>m.subjectId===s.id).length;
   return `<div class="sc" onclick="nav('${route.c}/${s.id}')"><div class="ic" style="background:${COLORS[i%COLORS.length]}"><i class="fas fa-book"></i></div><b>${esc(s.name)}</b><div class="m"><i class="fas fa-list"></i> ${nc} Chapters · <i class="fas fa-file"></i> ${nm} Materials</div><div class="go"><span>Open Subject</span><i class="fas fa-arrow-right"></i></div></div>`;}).join('')||'<div class="empty" style="grid-column:1/-1">इस course में जल्द ही subjects आएँगे।</div>'}</div>
  ${loose.length?`<h2 class="t" style="margin-top:20px"><i class="fas fa-folder-open" style="color:var(--p2)"></i> Other Materials</h2><div class="sub">&nbsp;</div><div class="chap open"><div class="b">${loose.map(matRow).join('')}</div></div>`:''}
+ ${featuresCard()}
  ${socialCard()}
  ${appCard()}`;
 }
@@ -209,8 +221,11 @@ function vSearch(){const k=q.toLowerCase();const L=visMat().filter(m=>[mTitle(m)
 function matRow(m,showPath){const t=T(m.type),p=acc(m)==='premium';
  return `<div class="mat" onclick="openMat('${m.id}')"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(mTitle(m))}</b><small>${t[0]}${showPath?' · '+esc((m.courseId||m.cat)+' → '+(m.sub||'')):''}${m.date?' · '+esc(m.date):''}</small></div>${p?'<span class="tag prem"><i class="fas fa-crown"></i> Premium</span>':''}<i class="fas fa-chevron-right" style="color:var(--mu)"></i></div>`;}
 function socialCard(){return `<h2 class="t" style="margin-top:22px"><i class="fas fa-share-nodes" style="color:var(--p2)"></i> Social</h2><div class="sub">नए notes, videos और updates सबसे पहले पाने के लिए जुड़िए।</div>
- <a class="wa" href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><div style="flex:1"><b>WhatsApp Channel</b><span>Smart Exam Academy को follow करें</span></div><span class="wbtn">Join</span></a>`;}
-function appCard(){return `<div class="app" style="margin-top:20px"><i class="fas fa-mobile-screen-button" style="font-size:38px"></i><div style="flex:1;min-width:200px"><h3>Smart Exam Academy App</h3><p>Android app PhonePe App Store पर उपलब्ध है — "Smart Exam Academy" search करें।</p></div></div>`;}
+ <a class="wa" href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><div style="flex:1"><b>WhatsApp Channel</b><span>Smart Exam Academy को follow करें</span></div><span class="wbtn">Join</span></a>
+ <a class="wa yt" href="https://youtube.com/@smartexamacademy" target="_blank" rel="noopener"><i class="fab fa-youtube"></i><div style="flex:1"><b>YouTube · @SmartExamAcademy</b><span>LNMU BA / B.Sc / B.Com semester classes और competition exam videos</span></div><span class="wbtn">Subscribe</span></a>`;}
+function featuresCard(){const F=[['fa-robot','#7c3aed','AI Study Helper','अपने सवाल हिंदी या English में पूछें — AI teacher step-by-step समझाता है और जवाब हिंदी आवाज़ में सुनाता भी है।'],['fa-circle-play','#E91E63','Video Classes','Subject → इकाई (unit) के हिसाब से सजी video classes, app के अंदर ही देखें।'],['fa-file-pdf','#F44336','PDF Notes','Unit-wise PDF notes, objective / subjective और important questions — app में खोलें और download करें।'],['fa-vial','#ff6d00','Tests & MCQ','हर unit के MCQ tests और quiz — तैयारी जाँचें।'],['fa-book-open','#1d4ed8','Paid Course ₹49','पूरा semester course सिर्फ़ ₹49 में, 10 महीने की validity। पहले Free Demo देखें।']];
+ return `<h2 class="t" style="margin-top:22px"><i class="fas fa-star" style="color:#f59e0b"></i> App की खास बातें</h2><div class="sub">Smart Exam Academy app में पढ़ाई के लिए सब कुछ।</div><div class="afgrid">${F.map(f=>`<div class="af"><div class="ic" style="background:${f[1]}"><i class="fas ${f[0]}"></i></div><b>${f[2]}</b><p>${f[3]}</p></div>`).join('')}</div>`;}
+function appCard(){return `<div class="app" style="margin-top:20px"><i class="fas fa-mobile-screen-button" style="font-size:38px"></i><div style="flex:1;min-width:200px"><h3>Smart Exam Academy App डाउनलोड करें</h3><p>Android app PhonePe App Store पर जल्द आ रहा है — वहाँ "Smart Exam Academy" search करें। App में AI study helper (हिंदी आवाज़), PDF notes, tests और video classes मिलते हैं। इसी account से website और app दोनों में login करें।</p></div></div>`;}
 
 // ---------- material viewer ----------
 function ytId(u){const m=u.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:null;}
@@ -227,179 +242,256 @@ function viewer(title,u,type,path,desc){const y=ytId(u),d=driveId(u),t=T(type),h
 function openM(h){$('mBody').innerHTML=h;$('modal').style.display='flex';document.body.style.overflow='hidden';}
 function closeM(){$('modal').style.display='none';$('mBody').innerHTML='';document.body.style.overflow='';}
 
-// ---------- student login / register ----------
-function updUser(){$('userBtn').innerHTML=me?`<i class="fas fa-user-check"></i><span>${esc(me.name.split(' ')[0])}</span>`:'<i class="fas fa-user"></i><span>Student Login</span>';}
-function userClick(){if(!me)return openLogin();openM(`<div class="form"><h3 style="margin-bottom:6px"><i class="fas fa-user-circle" style="color:var(--p2)"></i> ${esc(me.name)}</h3><p style="color:var(--mu)">${esc(me.email)}${me.cat?' · '+esc(cName(me.cat)):''}</p><div style="margin-top:16px;display:flex;gap:8px"><button class="btn gy" onclick="closeM()">Close</button><button class="btn" style="background:#dc2626" onclick="localStorage.removeItem('sea_student');me=null;firebase.auth().signOut().catch(()=>{});closeM();render()"><i class="fas fa-sign-out-alt"></i> Logout</button></div></div>`);}
-function openLogin(msg,reg){openM(`<div class="form"><div style="display:flex;align-items:center"><h3 style="flex:1"><i class="fas fa-user-circle" style="color:var(--p2)"></i> ${reg?'New Registration':'Student Login'}</h3><button class="x" onclick="closeM()">×</button></div>
+// ---------- student account (Firebase Auth only) ----------
+const WORKER='https://sea-otp.sonukumarhark.workers.dev';
+const WA_SUPPORT='https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C';
+const skey=e=>String(e||'').toLowerCase().trim().replace(/\./g,',');
+try{localStorage.removeItem('sea_student');}catch(e){}
+function updUser(){$('userBtn').innerHTML=me?`<i class="fas fa-user-check"></i><span>${esc(String(me.name||'Student').split(' ')[0])}</span>`:'<i class="fas fa-user"></i><span>Student Login</span>';}
+function userClick(){if(!me)return openLogin();openM(`<div class="form"><h3 style="margin-bottom:6px"><i class="fas fa-user-circle" style="color:var(--p2)"></i> ${esc(me.name)}</h3><p style="color:var(--mu)">${esc(me.email)}${me.cat?' · '+esc(cName(me.cat)):''}</p><div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn gy" onclick="closeM()">Close</button><button class="btn" onclick="closeM();nav('premium')"><i class="fas fa-book-bookmark"></i> My Course</button><button class="btn" style="background:#dc2626" onclick="firebase.auth().signOut().catch(()=>{});closeM()"><i class="fas fa-sign-out-alt"></i> Logout</button></div></div>`);}
+const GBTN=`<button type="button" class="gbtn" onclick="doGoogle()"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34.1 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg> Google से Login करें</button>`;
+function openLogin(msg,reg){openM(`<div class="form"><div style="display:flex;align-items:center"><h3 style="flex:1"><i class="fas fa-user-circle" style="color:var(--p2)"></i> ${reg?'New Registration · नया account':'Student Login'}</h3><button class="x" onclick="closeM()">×</button></div>
  ${msg?`<p style="background:#fef3c7;color:#92400e;padding:9px;border-radius:8px;margin-top:10px;font-size:13px">${esc(msg)}</p>`:''}
- <form onsubmit="${reg?'doReg':'doLogin'}(event)">${reg?'<label>Full Name</label><input id="rN" required>':''}<label>Email</label><input id="lE" type="email" required autocomplete="username"><label>Password</label><input id="lP" type="password" required minlength="${reg?6:1}" autocomplete="${reg?'new-password':'current-password'}">
+ <div style="margin-top:12px">${GBTN}</div><div class="or"><span>या</span></div>
+ <form onsubmit="${reg?'doReg':'doLogin'}(event)">${reg?'<label>Full Name</label><input id="rN" required maxlength="80">':''}<label>Email</label><input id="lE" type="email" required autocomplete="username">${reg?'<label>Mobile number</label><input id="rM" required inputmode="numeric" maxlength="14" placeholder="10 अंक (6–9 से शुरू)">':''}<label>Password</label><input id="lP" type="password" required minlength="${reg?6:1}" autocomplete="${reg?'new-password':'current-password'}">
  ${reg?`<label>Course</label><select id="rC">${COURSES.slice(0,6).map(c=>`<option value="${c.id}" ${c.id===route.c?'selected':''}>${c.name}</option>`).join('')}</select>`:''}
- <div class="err" id="lErr"></div><button class="btn" style="width:100%;justify-content:center;margin-top:14px">${reg?'Register':'Login'}</button></form>
- <p style="text-align:center;margin-top:12px;font-size:13px">${reg?'पहले से account है? <a style="color:var(--p2);cursor:pointer" onclick="openLogin()">Login</a>':'नया student? <a style="color:var(--p2);cursor:pointer" onclick="openLogin(\'\',true)">Register करें</a>'}</p></div>`);}
-const skey=e=>e.toLowerCase().trim().replace(/\./g,',');
-async function findStudent(email){const s=await db.ref('students_v3/'+skey(email)).once('value');return s.exists()?{id:s.key,...s.val()}:null;}
-function setMe(id,n,em,c){me={id,name:n||em,email:em,cat:c||''};localStorage.setItem('sea_student',JSON.stringify(me));closeM();render();}
-async function doLogin(e){e.preventDefault();const em=$('lE').value.trim().toLowerCase(),p=$('lP').value;$('lErr').textContent='';
- try{await firebase.auth().signInWithEmailAndPassword(em,p);}
- catch(x){const c=x&&x.code||'';$('lErr').textContent=/network/.test(c)?'Internet check करें, फिर कोशिश करें':/too-many/.test(c)?'बहुत ज़्यादा कोशिश हुई, थोड़ी देर बाद login करें':'गलत email या password';return;}
- let u=null;try{u=await findStudent(em);}catch(x){}
- setMe(skey(em),u&&u.name,em,u&&(u.cat||u.course));}
-async function doReg(e){e.preventDefault();const n=$('rN').value.trim(),em=$('lE').value.trim().toLowerCase(),p=$('lP').value,c=$('rC').value;$('lErr').textContent='';
- let uid='';
- try{const r=await firebase.auth().createUserWithEmailAndPassword(em,p);uid=r.user.uid;}
- catch(x){const k=x&&x.code||'';$('lErr').textContent=k==='auth/email-already-in-use'?'यह email पहले से registered है — Login करें':k==='auth/weak-password'?'Password कम से कम 6 अक्षर का हो':k==='auth/invalid-email'?'सही email डालें':'Registration नहीं हो पाया';return;}
- try{await db.ref('students_v3/'+skey(em)).update({name:n,email:em,cat:c,course:c,score:0,uid:uid,registered:new Date().toISOString()});}catch(err){}
- setMe(skey(em),n,em,c);}
-// ---------- Premium Courses (paid, UPI + verification) — student side only ----------
-const P={courses:[],loaded:false,denied:false,cfg:{},user:null,authReady:false,enr:{},req:[],enrDenied:false,content:{},refs:[]};
-const PAY_DEFAULT={upiId:'7009466362@ibl',payeeName:'Sonu Kumar'};
+ <div class="err" id="lErr"></div><button class="btn" id="lBtn" style="width:100%;justify-content:center;margin-top:14px">${reg?'Register':'Login'}</button></form>
+ ${reg?'':'<p style="text-align:center;margin-top:10px;font-size:13px"><a style="color:var(--p2);cursor:pointer" onclick="doReset()">Password भूल गए?</a></p>'}
+ <p style="text-align:center;margin-top:8px;font-size:13px">${reg?'पहले से account है? <a style="color:var(--p2);cursor:pointer" onclick="openLogin()">Login</a>':'नया student? <a style="color:var(--p2);cursor:pointer" onclick="openLogin(\'\',true)">Register करें</a>'}</p>
+ <p class="m" style="text-align:center;margin-top:8px"><i class="fas fa-shield-halved"></i> सुरक्षित लॉगिन · <a href="privacy.html" style="color:var(--p2)">Privacy Policy</a></p></div>`);}
+const phoneClean=r=>{let d=String(r||'').replace(/\D/g,'');if(d.length===12&&d.startsWith('91'))d=d.slice(2);return d;};
+const phoneOk=r=>/^[6-9]\d{9}$/.test(phoneClean(r));
+async function doLogin(e){e.preventDefault();const em=$('lE').value.trim().toLowerCase(),p=$('lP').value;$('lErr').textContent='';$('lBtn').disabled=true;
+ try{await firebase.auth().signInWithEmailAndPassword(em,p);closeM();}
+ catch(x){const c=x&&x.code||'';$('lBtn').disabled=false;$('lErr').textContent=/network/.test(c)?'Internet check करें, फिर कोशिश करें':/too-many/.test(c)?'बहुत ज़्यादा कोशिश हुई, थोड़ी देर बाद login करें':'गलत email या password';}}
+async function doReg(e){e.preventDefault();const n=$('rN').value.trim(),em=$('lE').value.trim().toLowerCase(),p=$('lP').value,c=$('rC').value,ph=$('rM').value;$('lErr').textContent='';
+ if(!phoneOk(ph))return $('lErr').textContent='सही 10 अंक का mobile number डालें';
+ $('lBtn').disabled=true;let u=null;
+ try{u=(await firebase.auth().createUserWithEmailAndPassword(em,p)).user;}
+ catch(x){const k=x&&x.code||'';$('lBtn').disabled=false;$('lErr').textContent=k==='auth/email-already-in-use'?'यह email पहले से registered है — Login करें':k==='auth/weak-password'?'Password कम से कम 6 अक्षर का हो':k==='auth/invalid-email'?'सही email डालें':'Registration नहीं हो पाया';return;}
+ try{await u.updateProfile({displayName:n});}catch(x){}
+ const now=Date.now();
+ try{await db.ref('students_v3/'+skey(em)).update({name:n,email:em,cat:c,course:c,score:0,uid:u.uid,registered:new Date().toISOString()});}catch(x){}
+ try{await db.ref('users/'+u.uid).update({uid:u.uid,name:n,email:em,course:c,phone:'+91 '+phoneClean(ph),phoneUpdatedAt:now,lastLogin:now});}catch(x){}
+ if(me){me.name=n;me.cat=c;}closeM();render();}
+async function doGoogle(){const er=$('lErr');if(er)er.textContent='';const a=firebase.auth(),pr=new firebase.auth.GoogleAuthProvider();pr.setCustomParameters({prompt:'select_account'});
+ try{await a.signInWithPopup(pr);closeM();}
+ catch(x){const c=x&&x.code||'';if(/popup-blocked|operation-not-supported/.test(c)){try{await a.signInWithRedirect(pr);}catch(y){}return;}
+  if(/popup-closed|cancelled-popup/.test(c))return;if(er)er.textContent=/account-exists/.test(c)?'इस email का account password से बना है — email/password से login करें':'Google login नहीं हो पाया। फिर कोशिश करें।';}}
+async function doReset(){const em=($('lE')&&$('lE').value||'').trim().toLowerCase();if(!em.includes('@')){$('lErr').textContent='पहले ऊपर अपना email डालें';return;}
+ try{await firebase.auth().sendPasswordResetEmail(em);$('lErr').style.color='#16a34a';$('lErr').textContent='Reset link '+em+' पर भेज दिया गया है। Email (spam भी) देखें।';}
+ catch(x){$('lErr').textContent='Reset email नहीं भेजा जा सका। Email check करें।';}}
+async function loadProfile(u){const p={uid:u.uid,name:u.displayName||String(u.email||'').split('@')[0],email:String(u.email||'').toLowerCase(),cat:''};
+ const google=(u.providerData||[]).some(x=>x&&x.providerId==='google.com');
+ try{const s=await db.ref('students_v3/'+skey(u.email)).once('value');const v=s.val();
+  if(v){p.name=v.name||p.name;p.cat=v.cat||v.course||'';}
+  else if(google&&u.email){await db.ref('students_v3/'+skey(u.email)).update({name:p.name,email:p.email,uid:u.uid,provider:'google',cat:route.c,course:route.c,score:0,registered:new Date().toISOString()});}}catch(e){}
+ try{await db.ref('users/'+u.uid).update({uid:u.uid,name:p.name,email:p.email,lastLogin:Date.now()});}catch(e){}
+ return p;}
+
+// ---------- Paid & Free courses (same data as the app) ----------
+const P={courses:[],raw:{},loaded:false,denied:false,cfg:{},user:null,authReady:false,enr:{},req:[],content:{},refs:[],tab:{},fq:{}};
 const num=v=>{if(typeof v==='number')return isFinite(v)?v:null;if(typeof v==='string'&&v.trim()!==''){const n=parseFloat(v);return isFinite(n)?n:null;}return null;};
 const str=(o,...k)=>{for(const x of k){const v=o&&o[x];if(v!==undefined&&v!==null&&String(v).trim()!=='')return String(v).trim();}return '';};
 const rs=v=>{v=Number(v)||0;return '₹'+(v%1===0?String(v):v.toFixed(2));};
 const isDenied=e=>!!e&&(e.code==='PERMISSION_DENIED'||/permission|denied/i.test(e.message||''));
 const safeUrl=u=>{u=String(u||'').trim();return /^https?:\/\//i.test(u)?u:'';};
 const fmtD=t=>t?new Date(t).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'';
-const DENIED_MSG='Premium courses अभी setup हो रहे हैं। थोड़ी देर बाद फिर देखें 🙏';
+const DEFAULT_FEATURES=['Recorded Video Class','Unit Wise PDF Notes','Unit Wise MCQ Test','Objective & Subjective','PYQ (पिछले साल के प्रश्न)','Doubt Support'];
 function parseCourse(id,c){const title=str(c,'title');if(!title)return null;const price=num(c.price)||0,mrp=num(c.mrp);
- return {id,title,description:str(c,'description','desc'),course:str(c,'course','courseId','cat'),semester:str(c,'semester'),price,
-  mrp:mrp&&mrp>0?mrp:null,thumbnail:str(c,'thumbnail','thumb','image'),validityDays:(v=>v&&v>0?Math.floor(v):null)(num(c.validityDays)),
+ let f=c.features;f=Array.isArray(f)?f:(f&&typeof f==='object'?Object.values(f):String(f||'').split('\n'));f=f.map(x=>String(x||'').trim()).filter(Boolean);
+ return {id,title,description:str(c,'description','desc'),course:str(c,'course','courseId','cat'),semester:str(c,'semester'),price,isFree:price<=0,
+  mrp:mrp&&mrp>price?mrp:null,thumbnail:str(c,'thumbnail','thumb','image'),validityDays:(v=>v&&v>0?Math.floor(v):null)(num(c.validityDays)),
   active:String(c.active).toLowerCase()!=='false',order:Math.floor(num(c.order)||0),itemCount:Math.floor(num(c.itemCount)||0),
-  videoCount:Math.floor(num(c.videoCount)||0),pdfCount:Math.floor(num(c.pdfCount)||0),testCount:Math.floor(num(c.testCount)||0)};}
-const offPct=c=>c.mrp&&c.mrp>c.price?Math.floor((c.mrp-c.price)/c.mrp*100):0;
-function payCfg(){const c=P.cfg||{};let upi=str(c,'upiId').replace(/\s/g,'');const pn=str(c,'payeeName','payee');
- if(!upi.includes('@'))upi=PAY_DEFAULT.upiId;
- return {upiId:upi,payeeName:pn||PAY_DEFAULT.payeeName,qrImageUrl:safeUrl(str(c,'qrImageUrl')),whatsapp:str(c,'supportWhatsapp','whatsapp'),instructions:str(c,'instructions')};}
-function upiUri(cfg,amount,note){const tn=String(note||'').replace(/[^A-Za-z0-9 .,()\-]/g,' ').replace(/\s+/g,' ').trim().slice(0,60)||'Smart Exam Academy';
- return 'upi://pay?pa='+encodeURIComponent(cfg.upiId).replace(/%40/g,'@')+'&pn='+encodeURIComponent(cfg.payeeName)+'&am='+(Number(amount)||0).toFixed(2)+'&cu=INR&tn='+encodeURIComponent(tn);}
-function waLink(w){w=String(w||'').trim();if(!w)return '';if(/^https?:\/\//i.test(w))return safeUrl(w);let d=w.replace(/\D/g,'');if(d.length===10)d='91'+d;return d.length>=11?'https://wa.me/'+d:'';}
-function accessFor(cid){const e=P.enr[cid];if(e)return (!e.expiresAt||e.expiresAt>Date.now())?'ENROLLED':'EXPIRED';
- const L=P.req.filter(r=>r.courseId===cid).sort((a,b)=>b.createdAt-a.createdAt);if(!L.length)return 'BUY';
- return L[0].status==='pending'?'PENDING':L[0].status==='rejected'?'REJECTED':'BUY';}
-const latestReq=cid=>P.req.filter(r=>r.courseId===cid).sort((a,b)=>b.createdAt-a.createdAt)[0];
+  videoCount:Math.floor(num(c.videoCount)||0),pdfCount:Math.floor(num(c.pdfCount)||0),testCount:Math.floor(num(c.testCount)||0),features:f.length?f:DEFAULT_FEATURES};}
+const offPct=c=>c.mrp?Math.floor((c.mrp-c.price)/c.mrp*100):0;
+function validityLabel(d){if(!d)return 'Lifetime';if(d%365===0){const y=d/365;return y+' YEAR'+(y>1?'S':'');}if(d>=28){const m=Math.round(d/30.4);return m+' MONTH'+(m>1?'S':'');}return d+' DAY'+(d>1?'S':'');}
+function accessFor(cid){const e=P.enr[cid];if(e)return (!e.expiresAt||e.expiresAt>Date.now())?'ENROLLED':'EXPIRED';return 'BUY';}
+const owned=c=>P.user&&accessFor(c.id)==='ENROLLED';
+const pendingReq=cid=>P.req.filter(r=>r.courseId===cid&&r.status==='pending').sort((a,b)=>b.createdAt-a.createdAt)[0];
+const sameSem=(a,b)=>a.course.trim().toLowerCase()===b.course.trim().toLowerCase()&&a.semester.trim()===b.semester.trim();
+const demoFor=c=>c.isFree?null:P.courses.find(x=>x.isFree&&x.active&&x.id!==c.id&&sameSem(x,c)&&(c.semester||c.course));
+const paidFor=c=>c.isFree?P.courses.find(x=>!x.isFree&&x.active&&sameSem(x,c)&&(c.semester||c.course)):null;
+const visibleCourse=c=>c.active||owned(c);
 const pRender=()=>{if(route.p||(!route.s&&!q))render();};
 
-db.ref('paid_courses_v3').on('value',snap=>{const a=[];snap.forEach(ch=>{const v=ch.val();if(v&&typeof v==='object'){const c=parseCourse(ch.key,v);if(c)a.push(c);}});
- P.courses=a.sort((x,y)=>x.order-y.order||x.title.localeCompare(y.title));P.loaded=true;P.denied=false;pRender();},
- e=>{P.loaded=true;P.denied=isDenied(e)||true;pRender();});
+db.ref('paid_courses_v3').on('value',snap=>{const a=[],raw={};snap.forEach(ch=>{const v=ch.val();if(v&&typeof v==='object'){raw[ch.key]=v;const c=parseCourse(ch.key,v);if(c)a.push(c);}});
+ P.raw=raw;P.courses=a.sort((x,y)=>x.order-y.order||x.title.localeCompare(y.title));P.loaded=true;P.denied=false;
+ Object.keys(P.content).forEach(k=>{const c=a.find(x=>x.id===k);if(c&&c.isFree)delete P.content[k];});pRender();},
+ e=>{P.loaded=true;P.denied=true;pRender();});
 db.ref('app_config_v3/payment').on('value',s=>{P.cfg=s.val()||{};},e=>{P.cfg={};});
-firebase.auth().onAuthStateChanged(u=>{P.refs.forEach(([r,f])=>r.off('value',f));P.refs=[];P.enr={};P.req=[];P.reqLoaded=false;P.content={};P.enrDenied=false;P.user=u||null;P.authReady=true;
- if(u){const r1=db.ref('enrollments_v3/'+u.uid),f1=r1.on('value',s=>{const m={};s.forEach(c=>{const v=c.val()||{};const ex=num(v.expiresAt);m[c.key]={approvedAt:num(v.approvedAt)||0,expiresAt:ex&&ex>0?ex:null};});P.enr=m;P.enrDenied=false;pRender();},e=>{P.enrDenied=true;pRender();});
-  const r2=db.ref('purchase_requests_v3/'+u.uid),f2=r2.on('value',s=>{const a=[];s.forEach(c=>{const v=c.val()||{};a.push({id:c.key,courseId:str(v,'courseId'),courseTitle:str(v,'courseTitle'),amount:num(v.amount)||0,utr:str(v,'utr'),status:(str(v,'status')||'pending').toLowerCase(),createdAt:num(v.createdAt)||0,note:str(v,'note')});});P.req=a;P.reqLoaded=true;pRender();},e=>{P.reqLoaded=true;pRender();});
-  P.refs=[[r1,f1],[r2,f2]];}
- pRender();});
+firebase.auth().onAuthStateChanged(async u=>{P.refs.forEach(([r,f])=>r.off('value',f));P.refs=[];P.enr={};P.req=[];P.content={};P.user=u||null;
+ if(u){me={uid:u.uid,name:u.displayName||String(u.email||'').split('@')[0],email:String(u.email||'').toLowerCase(),cat:''};
+  const r1=db.ref('enrollments_v3/'+u.uid),f1=r1.on('value',s=>{const m={};s.forEach(c=>{const v=c.val()||{};const ex=num(v.expiresAt);m[c.key]={approvedAt:num(v.approvedAt)||0,expiresAt:ex&&ex>0?ex:null};});P.enr=m;
+   Object.keys(P.content).forEach(k=>{if(P.content[k].state!=='ok')delete P.content[k];});pRender();},e=>{pRender();});
+  const r2=db.ref('purchase_requests_v3/'+u.uid),f2=r2.on('value',s=>{const a=[];s.forEach(c=>{const v=c.val()||{};a.push({courseId:str(v,'courseId'),status:(str(v,'status')||'pending').toLowerCase(),createdAt:num(v.createdAt)||0});});P.req=a;pRender();},e=>{});
+  P.refs=[[r1,f1],[r2,f2]];P.authReady=true;updUser();pRender();
+  const p=await loadProfile(u);if(P.user&&P.user.uid===u.uid){me=p;updUser();pRender();}}
+ else{me=null;P.authReady=true;updUser();pRender();}});
+firebase.auth().getRedirectResult().catch(()=>{});
 
-function stateBadge(st){return st==='ENROLLED'?'<span class="tag" style="background:#dcfce7;color:#166534"><i class="fas fa-check"></i> Purchased</span>':st==='PENDING'?'<span class="tag" style="background:#fef3c7;color:#92400e"><i class="fas fa-hourglass-half"></i> Verification pending</span>':st==='REJECTED'?'<span class="tag" style="background:#fee2e2;color:#991b1b">Rejected</span>':st==='EXPIRED'?'<span class="tag" style="background:#e5e7eb;color:#374151">Expired</span>':'';}
-function counts(c){const a=[];if(c.videoCount)a.push(`<span><i class="fas fa-circle-play"></i> ${c.videoCount} Videos</span>`);if(c.pdfCount)a.push(`<span><i class="fas fa-file-pdf"></i> ${c.pdfCount} PDFs</span>`);if(c.testCount)a.push(`<span><i class="fas fa-vial"></i> ${c.testCount} Tests</span>`);if(!a.length&&c.itemCount)a.push(`<span><i class="fas fa-layer-group"></i> ${c.itemCount} items</span>`);return a.join('');}
-function thumb(c,cls){const u=safeUrl(c.thumbnail);return u?`<div class="${cls}"><img src="${esc(u)}" alt="" loading="lazy" onerror="this.remove()"><i class="fas fa-crown"></i></div>`:`<div class="${cls}"><i class="fas fa-crown"></i></div>`;}
-function priceHtml(c){const o=offPct(c);return `<span class="pr">${rs(c.price)}</span>${c.mrp&&c.mrp>c.price?` <s class="mrp">${rs(c.mrp)}</s>`:''}${o?` <span class="tag off">${o}% OFF</span>`:''}`;}
-const validity=c=>c.validityDays?`Validity: ${c.validityDays} दिन (approval से)`:'Lifetime access';
+// ---------- folders (same rules as app v1.0.26: subject path → nested folders, empty ones hidden) ----------
+const enc=s=>encodeURIComponent(s).replace(/'/g,'%27');
+const norm=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
+const keyFor=s=>(norm(s)||'general').replace(/[.#$\[\]\/]/g,'_');
+const cleanPath=s=>String(s||'').trim().replace(/\s*\/\s*/g,'/').replace(/^\/+|\/+$/g,'').trim();
+function kindOf(t,u){t=norm(t);if(['video','videos','lecture','live','live class','liveclass'].includes(t))return 'video';if(['pdf','notes','file'].includes(t))return 'pdf';if(['test','quiz','mcq','quiztest'].includes(t))return 'test';
+ u=String(u||'').toLowerCase();return /youtube\.com|youtu\.be|\.mp4/.test(u)?'video':/\.pdf|drive\.google\.com/.test(u)?'pdf':'link';}
+function metasOf(cid){const f=(P.raw[cid]||{}).folders||{};return Object.entries(f).filter(([k,v])=>v&&typeof v==='object').map(([k,v])=>({key:k,name:str(v,'name'),order:num(v.order),parent:str(v,'parent')}));}
+function segs(subject,metas){let rest=cleanPath(subject).replace(/\s+/g,' ');const G=[{id:'general',name:'General',meta:null}];if(!rest)return G;
+ const out=[];let pk='',inMeta=true;
+ while(rest){let m0=null,ml=-1;
+  if(inMeta){const rn=norm(rest);for(const m of metas){if(norm(m.parent)!==norm(pk))continue;for(const lab of [cleanPath(m.name).replace(/\s+/g,' '),m.key.trim()]){if(!lab)continue;const ln=norm(lab);if((rn===ln||rn.startsWith(ln+'/'))&&ln.length>ml){m0=m;ml=ln.length;}}}}
+  if(m0){out.push({id:keyFor(m0.key||m0.name),name:m0.name||m0.key,meta:m0});pk=m0.key;rest=ml>=rest.length?'':rest.slice(ml).replace(/^\/+/,'').trim();}
+  else{inMeta=false;const i=rest.indexOf('/');const part=(i<0?rest:rest.slice(0,i)).trim();rest=i<0?'':rest.slice(i+1).trim();if(part)out.push({id:keyFor(part),name:part,meta:null});}}
+ return out.length?out:G;}
+function buildTree(items,metas){const root={children:new Map(),items:[]};let n=0;
+ items.forEach(it=>{let node=root;segs(it.subject,metas).forEach(s=>{if(!node.children.has(s.id))node.children.set(s.id,{id:s.id,name:s.name,meta:s.meta,seen:n++,children:new Map(),items:[]});node=node.children.get(s.id);});node.items.push(it);});
+ const fin=node=>{let all=[...node.items];const kids=[...node.children.values()].map(c=>{fin(c);return c;}).filter(c=>c.all.length);
+  kids.sort((a,b)=>((a.meta&&a.meta.order!=null)?a.meta.order:1e5+a.seen)-((b.meta&&b.meta.order!=null)?b.meta.order:1e5+b.seen)||a.name.localeCompare(b.name));
+  kids.forEach(k=>all=all.concat(k.all));node.kids=kids;node.all=all;return node;};
+ return fin(root);}
+function loadContent(cid){const c=P.courses.find(x=>x.id===cid);if(!c)return;
+ const parse=obj=>{const a=[];Object.entries(obj||{}).forEach(([k,v])=>{if(!v||typeof v!=='object')return;const url=str(v,'url','link');if(!url)return;a.push({id:k,title:str(v,'title','tit')||'Lesson',kind:kindOf(str(v,'type'),url),url,subject:str(v,'subject','sub'),order:Math.floor(num(v.order)||0),pdf:str(v,'pdf','pdfUrl')});});
+  return a.sort((x,y)=>x.order-y.order||x.title.localeCompare(y.title));};
+ if(c.isFree){P.content[cid]={state:'ok',items:parse((P.raw[cid]||{}).content)};return;}
+ P.content[cid]={state:'loading',items:[]};
+ db.ref('paid_content_v3/'+cid).once('value').then(s=>{P.content[cid]={state:'ok',items:parse(s.val())};},e=>{P.content[cid]={state:isDenied(e)?'denied':'err',items:[]};}).then(()=>{if(route.p&&route.pc===cid)render();});}
+
+// ---------- course cards ----------
+function thumb(c,cls){const u=safeUrl(c.thumbnail);return `<div class="${cls}">${u?`<img src="${esc(u)}" alt="" loading="lazy" onerror="this.remove()">`:''}<i class="fas ${c.isFree?'fa-gift':'fa-book-open'}"></i></div>`;}
+function priceHtml(c){if(c.isFree)return '<span class="pr">FREE</span>';const o=offPct(c);return `<span class="pr">₹ ${esc(String(c.price%1===0?c.price:c.price.toFixed(2)))}</span>${c.mrp?` <s class="mrp">${rs(c.mrp)}</s> <span class="tag off">${o}% off</span>`:''}`;}
 const meta=c=>[c.course?cName(c.course):'',c.semester?('Semester '+c.semester):''].filter(Boolean).map(esc).join(' · ');
-function pcard(c){const st=P.user?accessFor(c.id):'BUY';
- return `<div class="pc" data-id="${esc(c.id)}" onclick="nav('premium/'+encodeURIComponent(this.dataset.id))">${thumb(c,'pth')}<div class="pcb"><b>${esc(c.title)}</b>${meta(c)?`<div class="m">${meta(c)}</div>`:''}<div class="pcc">${counts(c)}</div><div style="margin-top:8px">${priceHtml(c)}</div><div class="m" style="margin-top:4px"><i class="fas fa-clock"></i> ${validity(c)}</div>${st!=='BUY'?`<div style="margin-top:8px">${stateBadge(st)}</div>`:''}</div></div>`;}
-const activeCourses=()=>P.courses.filter(c=>c.active);
-function premiumStrip(){if(!P.loaded||P.denied)return '';const L=activeCourses();if(!L.length)return '';
- return `<div class="pstrip" onclick="nav('premium')"><i class="fas fa-crown"></i><div style="flex:1"><b>Premium Courses · प्रीमियम</b><span>${L.length} course${L.length>1?'s':''} · Full videos, PDF notes और tests · ${rs(Math.min(...L.map(c=>c.price)))} से शुरू</span></div><span class="wbtn">देखें <i class="fas fa-arrow-right"></i></span></div>`;}
+function featHtml(c){return `<div class="lbl" style="margin:12px 0 6px">इसमें शामिल है</div><div class="feat">${c.features.slice(0,8).map(f=>`<span><i class="fas fa-circle-check"></i> ${esc(f)}</span>`).join('')}</div>`;}
+function ccard(c){const own=owned(c),d=demoFor(c),go=`nav('premium/'+encodeURIComponent('${esc(c.id)}'))`;
+ const btns=(c.isFree||own)?`<button class="btn wide" onclick="event.stopPropagation();${go}"><i class="fas fa-play"></i> View Course</button><button class="btn gy sq" title="Share" onclick="event.stopPropagation();shareCourse('${esc(c.id)}')"><i class="fas fa-share-nodes"></i></button>`
+  :`<button class="btn dark wide" onclick="event.stopPropagation();buyCourse('${esc(c.id)}')"><i class="fas fa-cart-shopping"></i> Buy Now</button>${d?`<button class="btn ol" onclick="event.stopPropagation();nav('premium/'+encodeURIComponent('${esc(d.id)}'))">Demo</button>`:''}`;
+ const e=P.enr[c.id];
+ return `<div class="crs" onclick="${go}">${thumb(c,'cth')}<div class="cb"><b>${esc(c.title)}</b>${meta(c)?`<div class="m">${meta(c)}</div>`:''}
+ ${c.isFree?'<div class="valid free"><i class="fas fa-gift"></i> FREE DEMO</div>':`<div class="valid"><i class="fas fa-clock"></i> Validity – ${validityLabel(c.validityDays)}</div>`}
+ ${own?`<div class="m" style="margin-top:6px;color:#166534"><i class="fas fa-circle-check"></i> Purchased · ${e&&e.expiresAt?'Expiry Date: '+esc(fmtD(e.expiresAt)):'Lifetime access'}</div>`:`<div style="margin-top:6px">${priceHtml(c)}</div>`}
+ ${own||c.isFree?'':featHtml(c)}<div class="cbtn">${btns}</div></div></div>`;}
+function shareCourse(cid){const u=location.origin+location.pathname+'#/premium/'+encodeURIComponent(cid);const c=P.courses.find(x=>x.id===cid);
+ if(navigator.share)navigator.share({title:c?c.title:'Smart Exam Academy',url:u}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(u).then(()=>alert('Link copy हो गया ✓'),()=>{});}
+const paidList=()=>P.courses.filter(c=>!c.isFree&&c.active);
+const freeList=()=>P.courses.filter(c=>c.isFree&&c.active&&!(()=>{const p=paidFor(c);return p&&owned(p);})());
+function premiumStrip(){if(!P.loaded||P.denied)return '';const L=paidList(),F=freeList();if(!L.length&&!F.length)return '';
+ return `${L.length?`<div class="pstrip" onclick="nav('premium')"><i class="fas fa-book-open"></i><div style="flex:1"><b>Paid Course · ${rs(Math.min(...L.map(c=>c.price)))} में पूरा कोर्स</b><span>${L.length} course${L.length>1?'s':''} · Video classes, PDF notes और tests · Validity ${validityLabel(L[0].validityDays).toLowerCase()}</span></div><span class="wbtn">देखें <i class="fas fa-arrow-right"></i></span></div>`:''}
+ ${F.length?`<div class="pstrip fr" onclick="nav('premium');setTimeout(()=>{const x=document.getElementById('freeSec');if(x)x.scrollIntoView({behavior:'smooth'});},120)"><i class="fas fa-gift"></i><div style="flex:1"><b>Free Demo Courses · मुफ़्त</b><span>${F.length} free course${F.length>1?'s':''} · हर paper की पहली इकाई मुफ़्त</span></div><span class="wbtn">खोलें <i class="fas fa-arrow-right"></i></span></div>`:''}`;}
 
-function vPremium(){if(route.pc)return vPremiumCourse(route.pc);
- const head=`<div class="crumb"><a onclick="nav('')"><i class="fas fa-house"></i> Home</a> <i class="fas fa-chevron-right" style="font-size:10px"></i> Premium Courses</div>
- <div class="phero"><i class="fas fa-crown"></i><div><h1>Smart Exam Premium</h1><p>Full course videos, PDF notes और tests। UPI (PhonePe / Google Pay / Paytm) से pay करें — verification के बाद course खुल जाएगा।</p></div></div>`;
+function vPremium(){if(route.pc)return vCourse(route.pc);
+ const head=`<div class="crumb"><a onclick="nav('')"><i class="fas fa-house"></i> Home</a> <i class="fas fa-chevron-right" style="font-size:10px"></i> Courses</div>
+ <div class="phero"><i class="fas fa-book-open"></i><div><h1>Paid Course & Free Demo</h1><p>पूरा कोर्स — video classes, unit-wise PDF notes और MCQ tests। Razorpay से सुरक्षित payment (UPI / Card / Net Banking) — payment होते ही course खुल जाता है।</p></div></div>`;
  if(!P.loaded)return head+'<div id="loading"><i class="fas fa-spinner fa-spin" style="font-size:24px"></i></div>';
- if(P.denied)return head+`<div class="empty"><i class="fas fa-tools" style="font-size:26px;color:#f59e0b"></i><p style="margin-top:8px">${DENIED_MSG}</p></div>`;
- const L=activeCourses();if(!L.length)return head+'<div class="empty"><i class="fas fa-crown" style="font-size:26px;color:#f59e0b"></i><p style="margin-top:8px"><b>अभी कोई premium course नहीं है</b><br>जल्द ही नए courses आएँगे। तब तक free content Home पर देखें।</p></div>';
- const mine=P.user?L.filter(c=>accessFor(c.id)==='ENROLLED'):[];
- return head+(mine.length?`<h2 class="t"><i class="fas fa-circle-check" style="color:#16a34a"></i> मेरे Courses · My Purchased (${mine.length})</h2><div class="sub">&nbsp;</div><div class="pgrid">${mine.map(pcard).join('')}</div><div style="height:18px"></div>`:'')
-  +`<h2 class="t"><i class="fas fa-crown" style="color:#f59e0b"></i> सभी Courses · All Courses</h2><div class="sub">कोई course चुनें — details, price और content देखें।</div><div class="pgrid">${L.map(pcard).join('')}</div>`
-  +(me&&P.authReady&&!P.user?`<div class="card" style="margin-top:14px;background:#fff7ed;border-color:#fed7aa"><b><i class="fas fa-user-shield" style="color:#ea580c"></i> Account verify करें</b><p style="font-size:13px;color:var(--mu);margin:6px 0 10px">Course खरीदने और अपने purchased courses देखने के लिए login verify करना ज़रूरी है।</p><button class="btn" onclick="openVerify()">Verify करें</button></div>`:'');}
+ if(P.denied)return head+'<div class="empty">Courses अभी load नहीं हुए। थोड़ी देर बाद फिर देखें 🙏</div>';
+ const mine=P.user?P.courses.filter(c=>!c.isFree&&owned(c)):[],L=paidList().filter(c=>!owned(c)),F=freeList();
+ if(!mine.length&&!L.length&&!F.length)return head+'<div class="empty"><b>अभी कोई course नहीं है</b><br>जल्द ही नए courses आएँगे। तब तक free content Home पर देखें।</div>';
+ return head+(mine.length?`<h2 class="t"><i class="fas fa-book-bookmark" style="color:#16a34a"></i> My Course · मेरे Courses (${mine.length})</h2><div class="sub">&nbsp;</div><div class="cgrid">${mine.map(ccard).join('')}</div><div style="height:18px"></div>`:'')
+  +(L.length?`<h2 class="t"><i class="fas fa-book-open" style="color:#1d4ed8"></i> Paid Course</h2><div class="sub">कोई course चुनें — Buy Now से खरीदें या पहले Demo देखें।</div><div class="cgrid">${L.map(ccard).join('')}</div><div style="height:18px"></div>`:'')
+  +(F.length?`<h2 class="t" id="freeSec"><i class="fas fa-gift" style="color:#16a34a"></i> Free Demo Courses</h2><div class="sub">हर paper की पहली इकाई मुफ़्त — login करके पढ़ें।</div><div class="cgrid">${F.map(ccard).join('')}</div>`:'')
+  +(!me?`<div class="card" style="margin-top:14px;background:#eff6ff;border-color:#bfdbfe"><b><i class="fas fa-user" style="color:#1d4ed8"></i> पहले से course खरीदा है?</b><p style="font-size:13px;color:var(--mu);margin:6px 0 10px">उसी email से login करें — आपके courses यहीं "My Course" में दिखेंगे।</p><button class="btn" onclick="openLogin()">Login करें</button></div>`:'');}
 
-function vPremiumCourse(cid){const back=`<div class="crumb"><a onclick="nav('')"><i class="fas fa-house"></i> Home</a> <i class="fas fa-chevron-right" style="font-size:10px"></i> <a onclick="nav('premium')">Premium Courses</a></div>`;
+function vCourse(cid){const back=`<div class="crumb"><a onclick="nav('')"><i class="fas fa-house"></i> Home</a> <i class="fas fa-chevron-right" style="font-size:10px"></i> <a onclick="nav('premium')">Courses</a></div>`;
  if(!P.loaded)return back+'<div id="loading"><i class="fas fa-spinner fa-spin" style="font-size:24px"></i></div>';
- if(P.denied)return back+`<div class="empty">${DENIED_MSG}</div>`;
  const c=P.courses.find(x=>x.id===cid);
- const st=(me&&P.user)?accessFor(cid):'BUY';
- if(!c||(!c.active&&st!=='ENROLLED'))return back+`<div class="empty"><b>Course नहीं मिला</b><br>${c?'यह course अभी उपलब्ध नहीं है।':''} <a style="color:var(--p2);cursor:pointer" onclick="nav('premium')">सभी courses देखें</a></div>`;
- const r=latestReq(cid),e=P.enr[cid];let box='';
+ if(!c||!visibleCourse(c))return back+`<div class="empty"><b>Course नहीं मिला</b><br>यह course अभी उपलब्ध नहीं है। <a style="color:var(--p2);cursor:pointer" onclick="nav('premium')">सभी courses देखें</a></div>`;
+ const st=P.user?accessFor(cid):'BUY';
+ if(c.isFree||st==='ENROLLED')return back+vContent(c);
+ const d=demoFor(c),pr=pendingReq(cid);let box;
  if(me&&!P.authReady)box='<div class="empty" style="padding:14px"><i class="fas fa-spinner fa-spin"></i></div>';
- else if(st==='ENROLLED')box=`<div class="sbox ok"><i class="fas fa-circle-check"></i><div><b>आपने यह course खरीद लिया है ✓</b>${e&&e.expiresAt?`<span>Valid till ${esc(fmtD(e.expiresAt))}</span>`:'<span>Lifetime access</span>'}</div></div>`;
- else if(st==='PENDING')box=`<div class="sbox pend"><i class="fas fa-hourglass-half"></i><div><b>Payment verification pending</b><span>UTR: <b>${esc(r.utr)}</b> · ${rs(r.amount)}${r.createdAt?' · '+esc(fmtD(r.createdAt)):''}</span><span>Payment verify होने के बाद course अपने-आप खुल जाएगा (आम तौर पर 24 घंटे के अंदर)।</span></div></div>`;
- else if(st==='REJECTED')box=`<div class="sbox rej"><i class="fas fa-circle-xmark"></i><div><b>पिछली request reject हुई</b><span>UTR: ${esc(r.utr)}</span><span>${r.note?'कारण: '+esc(r.note):'Payment match नहीं हुआ।'}</span><span>सही UTR के साथ दोबारा request भेजें।</span></div></div><button class="btn buy" data-id="${esc(cid)}" onclick="buyCourse(this.dataset.id)"><i class="fas fa-rotate-right"></i> दोबारा try करें · ${rs(c.price)}</button>`;
- else if(st==='EXPIRED')box=`<div class="sbox rej"><i class="fas fa-clock"></i><div><b>Validity खत्म हो गई</b><span>Course दोबारा खरीदकर access पाएँ।</span></div></div><button class="btn buy" data-id="${esc(cid)}" onclick="buyCourse(this.dataset.id)"><i class="fas fa-cart-shopping"></i> दोबारा खरीदें · ${rs(c.price)}</button>`;
- else box=c.active?`<button class="btn buy" data-id="${esc(cid)}" onclick="buyCourse(this.dataset.id)"><i class="fas fa-cart-shopping"></i> Buy Now · खरीदें ${rs(c.price)}</button><div class="m" style="margin-top:8px;text-align:center">UPI से payment · Verification के बाद course unlock</div>`:'<div class="sbox rej"><div><b>अभी उपलब्ध नहीं</b></div></div>';
- if(me&&P.authReady&&!P.user&&st==='BUY'&&c.active)box+=`<p class="m" style="margin-top:8px;text-align:center"><i class="fas fa-user-shield"></i> पहले से खरीदा है? <a style="color:var(--p2);cursor:pointer" onclick="openVerify()">Account verify करें</a></p>`;
- return back+`<div class="pdet">${thumb(c,'pdth')}<div class="pdb"><h2 class="t">${esc(c.title)}</h2>${meta(c)?`<div class="sub" style="margin-bottom:6px">${meta(c)}</div>`:''}<div style="margin:8px 0">${priceHtml(c)}</div><div class="m"><i class="fas fa-clock"></i> ${validity(c)}</div><div class="pcc" style="margin-top:8px">${counts(c)}</div><div style="margin-top:14px">${box}</div></div></div>
+ else box=(st==='EXPIRED'?'<div class="sbox rej"><i class="fas fa-clock"></i><div><b>Validity खत्म हो गई</b><span>Course दोबारा खरीदकर access पाएँ।</span></div></div>':'')
+  +(pr?'<div class="sbox pend"><i class="fas fa-hourglass-half"></i><div><b>पुराना UPI payment verification में है</b><span>Verify होते ही course खुल जाएगा। अब नया payment Razorpay से होता है।</span></div></div>':'')
+  +`<div class="cbtn"><button class="btn dark wide" onclick="buyCourse('${esc(cid)}')"><i class="fas fa-cart-shopping"></i> ${st==='EXPIRED'?'दोबारा खरीदें':'Buy Now'} · ${rs(c.price)}</button>${d?`<button class="btn ol" onclick="nav('premium/'+encodeURIComponent('${esc(d.id)}'))">Demo</button>`:''}</div>
+  <div class="m" style="margin-top:8px;text-align:center"><i class="fas fa-lock"></i> Razorpay से सुरक्षित payment · UPI / Card / Net Banking</div>`;
+ return back+`<div class="pdet">${thumb(c,'pdth')}<div class="pdb"><h2 class="t">${esc(c.title)}</h2>${meta(c)?`<div class="sub" style="margin-bottom:6px">${meta(c)}</div>`:''}<div class="valid"><i class="fas fa-clock"></i> Validity – ${validityLabel(c.validityDays)}</div><div style="margin:10px 0 4px">${priceHtml(c)}</div>${featHtml(c)}<div style="margin-top:14px">${box}</div></div></div>
  ${c.description?`<div class="card"><div class="lbl"><i class="fas fa-circle-info"></i> Course के बारे में</div><p style="white-space:pre-wrap;line-height:1.6">${esc(c.description)}</p></div>`:''}
- <div class="card"><div class="lbl"><i class="fas fa-list"></i> ${st==='ENROLLED'?'Course Content':'इस course में क्या है · What\'s inside'}</div>${st==='ENROLLED'?contentHtml(cid):`<div class="pcc">${counts(c)||'Videos, PDF notes और tests'}</div><p class="m" style="margin-top:10px"><i class="fas fa-lock"></i> Content locked — खरीदने के बाद यहीं खुलेगा।</p>`}</div>`;}
+ <div class="card"><div class="lbl"><i class="fas fa-list"></i> इस course में क्या है</div><div class="pcc">${counts(c)||'Videos, PDF notes और tests'}</div><p class="m" style="margin-top:10px"><i class="fas fa-lock"></i> Content locked — खरीदने के बाद यहीं folder-wise खुलेगा।${d?' तब तक <a style="color:var(--p2);cursor:pointer" onclick="nav(\'premium/\'+encodeURIComponent(\''+esc(d.id)+'\'))">Free Demo</a> देखें।':''}</p></div>`;}
+function counts(c){const a=[];if(c.videoCount)a.push(`<span><i class="fas fa-circle-play"></i> ${c.videoCount} Videos</span>`);if(c.pdfCount)a.push(`<span><i class="fas fa-file-pdf"></i> ${c.pdfCount} PDFs</span>`);if(c.testCount)a.push(`<span><i class="fas fa-vial"></i> ${c.testCount} Tests</span>`);if(!a.length&&c.itemCount)a.push(`<span><i class="fas fa-layer-group"></i> ${c.itemCount} items</span>`);return a.join('');}
 
-const PTYPE={video:'Videos',pdf:'PDF',test:'Test',link:'Link'};
-function guessType(u){u=String(u).toLowerCase();return /youtube\.com|youtu\.be|\.mp4/.test(u)?'video':(/\.pdf|drive\.google\.com/.test(u)?'pdf':'link');}
-function contentHtml(cid){const s=P.content[cid];
- if(!s){loadContent(cid);return '<div class="empty" style="padding:16px"><i class="fas fa-spinner fa-spin"></i> Content load हो रहा है...</div>';}
- if(s.state==='loading')return '<div class="empty" style="padding:16px"><i class="fas fa-spinner fa-spin"></i> Content load हो रहा है...</div>';
- if(s.state==='denied')return `<div class="empty" style="padding:16px">Access verify नहीं हुआ। थोड़ी देर बाद दोबारा try करें या WhatsApp support से बात करें।<br><button class="btn gy" style="margin-top:10px" data-id="${esc(cid)}" onclick="delete P.content[this.dataset.id];render()">दोबारा try करें</button></div>`;
- if(s.state==='err')return `<div class="empty" style="padding:16px">Content load नहीं हुआ। Internet check करें।<br><button class="btn gy" style="margin-top:10px" data-id="${esc(cid)}" onclick="delete P.content[this.dataset.id];render()">दोबारा try करें</button></div>`;
- if(!s.items.length)return '<div class="empty" style="padding:16px"><b>Content जल्द आ रहा है</b><br>Teacher अभी videos/PDF upload कर रहे हैं।</div>';
- return `<div class="chap open" style="margin:0"><div class="b">${s.items.map(it=>{const t=T(PTYPE[it.type]||'Link');return `<div class="mat" data-id="${esc(cid)}" data-item="${esc(it.id)}" onclick="openPaid(this.dataset.id,this.dataset.item)"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(it.title)}</b><small>${t[0]}${it.subject?' · '+esc(it.subject):''}</small></div><i class="fas fa-chevron-right" style="color:var(--mu)"></i></div>`;}).join('')}</div></div>`;}
-async function loadContent(cid){P.content[cid]={state:'loading',items:[]};
- try{const s=await db.ref('paid_content_v3/'+cid).once('value');const a=[];
-  s.forEach(c=>{const v=c.val()||{};const url=str(v,'url','link');if(!url)return;a.push({id:c.key,title:str(v,'title','tit')||'Lesson',type:(str(v,'type').toLowerCase()||guessType(url)),url,subject:str(v,'subject','sub'),order:Math.floor(num(v.order)||0)});});
-  a.sort((x,y)=>x.order-y.order||x.title.localeCompare(y.title));P.content[cid]={state:'ok',items:a};}
- catch(e){P.content[cid]={state:isDenied(e)?'denied':'err',items:[]};}
- if(route.p&&route.pc===cid)render();}
-function openPaid(cid,iid){const s=P.content[cid];const it=s&&s.items.find(x=>x.id===iid);if(!it)return;const c=P.courses.find(x=>x.id===cid);
- viewer(it.title,it.url,PTYPE[it.type]||'Link',(c?c.title:'')+(it.subject?' → '+it.subject:''),'');}
+const KIND={video:['Video','fa-circle-play','#E91E63'],pdf:['PDF','fa-file-pdf','#F44336'],test:['Test','fa-vial','#ff6d00'],link:['Link','fa-link','#607D8B']};
+function vContent(c){const cid=c.id;let s=P.content[cid];if(!s){loadContent(cid);s=P.content[cid];}
+ const e=P.enr[cid],up=paidFor(c);
+ const head=`<div class="pdet slim">${thumb(c,'pdth sm')}<div class="pdb"><h2 class="t">${esc(c.title)}</h2>${meta(c)?`<div class="sub" style="margin-bottom:4px">${meta(c)}</div>`:''}${c.isFree?'<div class="valid free"><i class="fas fa-gift"></i> FREE DEMO</div>':`<div class="m" style="color:#166534"><i class="fas fa-circle-check"></i> Purchased · ${e&&e.expiresAt?'Expiry Date: '+esc(fmtD(e.expiresAt)):'Lifetime access'}</div>`}</div></div>`;
+ const upsell=up&&!owned(up)?`<div class="fbar"><div style="flex:1"><b>पूरा course सिर्फ़ ${rs(up.price)} में</b><span>सभी इकाइयाँ · Validity ${validityLabel(up.validityDays).toLowerCase()}</span></div><button class="btn dark" onclick="buyCourse('${esc(up.id)}')">Full course खरीदें</button></div>`:'';
+ if(!s||s.state==='loading')return head+'<div class="empty"><i class="fas fa-spinner fa-spin"></i> Content load हो रहा है...</div>';
+ if(s.state!=='ok')return head+`<div class="empty">${s.state==='denied'?'Access verify नहीं हुआ। थोड़ी देर बाद दोबारा try करें।':'Content load नहीं हुआ। Internet check करें।'}<br><button class="btn gy" style="margin-top:10px" onclick="delete P.content['${esc(cid)}'];render()">दोबारा try करें</button></div>`;
+ const items=s.items,hasT=items.some(i=>i.kind==='test'),hasN=items.some(i=>i.kind==='pdf');
+ let tab=P.tab[cid]||'content';if((tab==='test'&&!hasT)||(tab==='notes'&&!hasN))tab='content';
+ const tabs=`<div class="pills"><button class="${tab==='content'?'on':''}" onclick="setTab('${esc(cid)}','content')">Content</button>${hasT?`<button class="${tab==='test'?'on':''}" onclick="setTab('${esc(cid)}','test')">Test</button>`:''}${hasN?`<button class="${tab==='notes'?'on':''}" onclick="setTab('${esc(cid)}','notes')">Notes</button>`:''}</div>`;
+ const fq=P.fq[cid]||'';
+ const srch=`<div class="msearch" style="display:block"><i class="fas fa-search"></i><input id="fq" placeholder="इस course में खोजें..." value="${esc(fq)}" oninput="P.fq['${esc(cid)}']=this.value;clearTimeout(window._ft);window._ft=setTimeout(()=>{render();const i=$('fq');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}},300)"></div>`;
+ const pool=items.filter(i=>tab==='content'||(tab==='test'?i.kind==='test':i.kind==='pdf'));
+ if(!items.length)return head+upsell+'<div class="empty"><b>Content जल्द आ रहा है</b><br>Teacher अभी videos/PDF upload कर रहे हैं।</div>';
+ if(fq.trim()){const k=norm(fq);const L=pool.filter(i=>norm(i.title+' '+i.subject).includes(k)).slice(0,150);
+  return head+upsell+tabs+srch+`<div class="chap open"><div class="b">${L.map(i=>itemRow(cid,i,true)).join('')||'<div class="empty">कुछ नहीं मिला</div>'}</div></div>`;}
+ const tree=buildTree(pool,metasOf(cid));let node=tree;const path=[];
+ for(const id of route.f){const n=(node.kids||[]).find(k=>k.id===id);if(!n)break;path.push(n);node=n;}
+ const base='premium/'+enc(cid);let acc=base;
+ const crumb=`<div class="crumb"><a onclick="nav('${base}')"><i class="fas fa-folder-open"></i> ${esc(tab==='content'?'Content':tab==='test'?'Test':'Notes')}</a>${path.map((p,i)=>{acc+='/'+enc(p.id);return ` <i class="fas fa-chevron-right" style="font-size:10px"></i> ${i===path.length-1?esc(p.name):`<a onclick="nav('${acc}')">${esc(p.name)}</a>`}`;}).join('')}</div>`;
+ const here=base+route.f.slice(0,path.length).map(x=>'/'+enc(x)).join('');
+ const fl=(node.kids||[]).map(k=>{const v=k.all.filter(i=>i.kind==='video').length,f=k.all.filter(i=>i.kind==='pdf'||i.kind==='link').length,t=k.all.filter(i=>i.kind==='test').length;
+  const lab=[k.kids.length?k.kids.length+' folder'+(k.kids.length>1?'s':''):'',v?v+' video'+(v>1?'s':''):'',f?f+' file'+(f>1?'s':''):'',t?t+' test'+(t>1?'s':''):''].filter(Boolean).join(' | ');
+  return `<div class="mat" onclick="nav('${here}/${enc(k.id)}')"><div class="ic" style="background:#fef3c7;color:#d97706"><i class="fas fa-folder"></i></div><div class="tt"><b>${esc(k.name)}</b><small>${esc(lab)}</small></div><i class="fas fa-chevron-right" style="color:var(--mu)"></i></div>`;}).join('');
+ const il=(node===tree?tree.items:node.items).map(i=>itemRow(cid,i)).join('');
+ return head+upsell+tabs+srch+crumb+`<div class="chap open"><div class="b">${fl}${il}${!fl&&!il?'<div class="empty">इस folder में अभी कुछ नहीं है।</div>':''}</div></div>`;}
+function setTab(cid,t){P.tab[cid]=t;P.fq[cid]='';nav('premium/'+encodeURIComponent(cid));render();}
+function itemRow(cid,i,showPath){const t=KIND[i.kind]||KIND.link;
+ return `<div class="mat" onclick="openItem('${esc(cid)}','${esc(i.id)}')"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(i.title)}</b><small>${t[0]}${showPath&&i.subject?' · '+esc(i.subject.replace(/\//g,' › ')):''}</small></div><span class="tag" style="background:${t[2]}1f;color:${t[2]}">${i.kind==='video'?'Watch':i.kind==='test'?'Start':'Open'}</span></div>`;}
+function openItem(cid,iid){const s=P.content[cid];const it=s&&s.items.find(x=>x.id===iid);if(!it)return;const c=P.courses.find(x=>x.id===cid);
+ if(!me)return openLogin('पढ़ने के लिए पहले login करें (free है)।');
+ viewer(it.title,it.url,it.kind==='video'?'Videos':it.kind==='pdf'?'PDF':it.kind==='test'?'Test':'Link',(c?c.title:'')+(it.subject?' → '+it.subject.replace(/\//g,' → '):''),'');
+ if(it.kind==='video'&&safeUrl(it.pdf))$('mBody').querySelector('.mbody').insertAdjacentHTML('beforeend',` <a class="btn gy" style="margin-top:8px" href="${esc(safeUrl(it.pdf))}" target="_blank" rel="noopener"><i class="fas fa-file-pdf" style="color:#F44336"></i> PDF Notes</a>`);}
 
-function buyCourse(cid){if(!me)return openLogin('Premium course खरीदने के लिए पहले login करें।');
- if(!P.authReady)return;if(!P.user)return openVerify(cid);const st=accessFor(cid);if(st==='PENDING'||st==='ENROLLED')return render();openPay(cid);}
-function openVerify(cid){openM(`<div class="form"><div style="display:flex;align-items:center"><h3 style="flex:1"><i class="fas fa-user-shield" style="color:var(--p2)"></i> Account verify करें</h3><button class="x" onclick="closeM()">×</button></div>
- <p style="background:#eff6ff;color:#1e3a8a;padding:9px;border-radius:8px;margin-top:10px;font-size:13px">Course खरीदने के लिए आपका login verify होना ज़रूरी है। अपना email और password डालें (Firebase account नहीं है तो इसी password से बन जाएगा)।</p>
- <form data-id="${esc(cid||'')}" onsubmit="doVerify(event,this.dataset.id)"><label>Email</label><input id="vE" type="email" required autocomplete="username" value="${esc(me&&me.email||'')}"><label>Password (min 6)</label><input id="vP" type="password" required minlength="6" autocomplete="current-password">
- <div class="err" id="vErr"></div><button class="btn" id="vBtn" style="width:100%;justify-content:center;margin-top:14px">Verify</button></form>
- <p style="text-align:center;margin-top:12px;font-size:13px">Password याद नहीं? <a style="color:var(--p2);cursor:pointer" onclick="doReset()">Password reset email भेजें</a></p></div>`);}
-async function ensureFb(email,pass){const a=firebase.auth();email=email.trim().toLowerCase();
- if(!email.includes('@'))throw new Error('सही email डालें');if(pass.length<6)throw new Error('Password कम से कम 6 अक्षर का हो');
- try{return (await a.signInWithEmailAndPassword(email,pass)).user;}
- catch(x){const c=x&&x.code||'';if(!/user-not-found|wrong-password|invalid-credential|invalid-login-credentials/.test(c))throw new Error('Login fail: internet check करें');
-  try{return (await a.createUserWithEmailAndPassword(email,pass)).user;}
-  catch(y){if(y&&y.code==='auth/email-already-in-use')throw new Error('इस email का account पहले से है, पर password गलत है। "Password reset email भेजें" दबाएँ।');throw new Error('Account verify नहीं हुआ। फिर कोशिश करें।');}}}
-async function doVerify(e,cid){e.preventDefault();$('vErr').textContent='';$('vBtn').disabled=true;
- try{await ensureFb($('vE').value,$('vP').value);closeM();render();if(cid)afterVerify(cid,0);}
- catch(x){$('vErr').textContent=x.message;$('vBtn').disabled=false;}}
-function afterVerify(cid,n){if(!P.user||!P.reqLoaded){if(n<15)setTimeout(()=>afterVerify(cid,n+1),300);return;}if(['BUY','REJECTED','EXPIRED'].includes(accessFor(cid)))openPay(cid);}
-async function doReset(){const em=($('vE')&&$('vE').value||'').trim().toLowerCase();if(!em.includes('@')){$('vErr').textContent='पहले ऊपर अपना email डालें';return;}
- try{await firebase.auth().sendPasswordResetEmail(em);$('vErr').style.color='#16a34a';$('vErr').textContent='Reset link '+em+' पर भेज दिया गया है। Email देखें, नया password बनाएँ और फिर Verify करें।';}
- catch(x){$('vErr').textContent='Reset email नहीं भेजा जा सका। Email check करें।';}}
-
-function qrDataUrl(text){try{if(typeof qrcode!=='function')return '';const qr=qrcode(0,'M');qr.addData(text);qr.make();return qr.createDataURL(6,4);}catch(e){return '';}}
-function openPay(cid){const c=P.courses.find(x=>x.id===cid);if(!c)return;const cfg=payCfg(),upi=upiUri(cfg,c.price,c.title),qr=qrDataUrl(upi),wa=waLink(cfg.whatsapp);
- openM(`<div class="mh"><i class="fas fa-indian-rupee-sign" style="color:#16a34a"></i><b>Payment · भुगतान</b><button class="x" onclick="closeM()">×</button></div><div class="mbody">
- <div class="paysum"><b>${esc(c.title)}</b><span class="pr">${rs(c.price)}</span></div>
- <div class="lbl" style="margin-top:14px">Step 1: UPI app से pay करें · ${rs(c.price)}</div>
- <a class="btn buy" href="${esc(upi)}"><i class="fas fa-mobile-screen-button"></i> UPI App से Pay करें (PhonePe / GPay / Paytm)</a>
- <div class="upirow"><div style="flex:1;min-width:0"><small>UPI ID</small><b id="upiId">${esc(cfg.upiId)}</b><small>Pay to: ${esc(cfg.payeeName)}</small></div><button class="btn gy" type="button" onclick="copyUpi()"><i class="fas fa-copy"></i> Copy UPI ID</button></div>
- <p class="m">अगर app payment रोक दे तो UPI ID copy करके manually exact ${rs(c.price)} pay करें।</p>
- <div class="qrs">${qr?`<div class="qrb"><img src="${qr}" alt="UPI QR" id="upiQr"><small>UPI QR (${rs(c.price)}) — किसी दूसरे phone से scan करें</small></div>`:''}${cfg.qrImageUrl?`<div class="qrb"><img src="${esc(cfg.qrImageUrl)}" alt="Owner QR" onerror="this.parentNode.remove()"><small>Owner QR</small></div>`:''}</div>
- <div class="steps">${cfg.instructions?esc(cfg.instructions):`1. ऊपर के button से या QR scan करके exact ${rs(c.price)} pay करें।<br>2. Payment के बाद UPI app में 12 अंक का UTR / UPI Ref No. दिखेगा।<br>3. वह UTR नीचे डालकर Submit करें। Verification के बाद course खुल जाएगा।`}</div>
- <div class="lbl" style="margin-top:16px">Step 2: Payment details भेजें</div>
- <form data-id="${esc(cid)}" onsubmit="submitPay(event,this.dataset.id)"><label class="fl">UTR / UPI Transaction ID</label><input id="pU" required maxlength="40" placeholder="e.g. 412345678901" autocomplete="off">
- <label class="fl">Mobile number</label><input id="pM" required inputmode="numeric" maxlength="14" placeholder="10 अंक का mobile number">
- <label class="fl">Name</label><input id="pN" required maxlength="100" value="${esc(me&&me.name||'')}">
- <div class="err" id="pErr"></div><button class="btn" id="pBtn" style="width:100%;justify-content:center;margin-top:14px"><i class="fas fa-paper-plane"></i> Submit · जमा करें</button></form>
- ${wa?`<a class="btn gy" style="width:100%;justify-content:center;margin-top:10px" href="${esc(wa)}" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="color:#25D366"></i> Payment में दिक्कत? WhatsApp करें</a>`:''}</div>`);}
-function copyUpi(){const t=$('upiId').textContent;const done=()=>{$('upiId').insertAdjacentHTML('afterend','<small style="color:#16a34a" id="cpOk"> UPI ID copy हो गई ✓</small>');setTimeout(()=>{const x=$('cpOk');if(x)x.remove();},2000);};
- if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done,()=>fbCopy(t,done));else fbCopy(t,done);}
-function fbCopy(t,done){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done();}catch(e){}a.remove();}
-const cleanUtr=r=>String(r||'').trim().replace(/[\s-]/g,'').toUpperCase();
-const cleanPhone=r=>{const d=String(r||'').replace(/\D/g,'');return d.length===12&&d.startsWith('91')?d.slice(2):d;};
-async function submitPay(e,cid){e.preventDefault();const c=P.courses.find(x=>x.id===cid);if(!c)return;const err=$('pErr');err.textContent='';
- const utr=cleanUtr($('pU').value),ph=cleanPhone($('pM').value),nm=$('pN').value.trim();
- if(!/^[A-Z0-9]{6,30}$/.test(utr))return err.textContent='सही UTR डालें (6–30 अक्षर/अंक)';
- if(!/^\d{10}$/.test(ph))return err.textContent='10 अंक का सही mobile number डालें';
- if(!nm)return err.textContent='अपना नाम डालें';
- const u=firebase.auth().currentUser;if(!u){closeM();return openVerify(cid);}
- $('pBtn').disabled=true;
- try{const ref=db.ref('purchase_requests_v3/'+u.uid).push();
-  await ref.set({courseId:c.id,courseTitle:c.title.slice(0,200),amount:c.price,utr,name:nm.slice(0,100),email:String(u.email||(me&&me.email)||'').slice(0,200),phone:ph,status:'pending',createdAt:firebase.database.ServerValue.TIMESTAMP});
-  closeM();render();openM(`<div class="form" style="text-align:center"><i class="fas fa-circle-check" style="font-size:44px;color:#16a34a"></i><h3 style="margin:10px 0 6px">Request भेज दी गई ✓</h3><p style="color:var(--mu);font-size:13px">UTR: <b>${esc(utr)}</b><br>Payment verify होने के बाद course अपने-आप खुल जाएगा (आम तौर पर 24 घंटे के अंदर)।</p><button class="btn" style="margin-top:14px" onclick="closeM()">OK</button></div>`);}
- catch(x){$('pBtn').disabled=false;err.textContent=isDenied(x)?'Request save नहीं हुई (permission)। कृपया दोबारा login करें या थोड़ी देर बाद try करें।':'Request save नहीं हुई। Internet check करें।';}}
+// ---------- buying: email OTP + mobile check, then Razorpay ----------
+async function workerCall(path,body){const u=firebase.auth().currentUser;if(!u)throw new Error('login');const tok=await u.getIdToken();
+ const r=await fetch(WORKER+path,{method:'POST',headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify(body||{})});
+ let j={};try{j=await r.json();}catch(e){}j._status=r.status;return j;}
+async function isVerified(u){if((u.providerData||[]).some(x=>x&&x.providerId==='google.com')||u.emailVerified)return true;
+ try{const v=(await db.ref('email_otp_verified/'+u.uid).once('value')).val();if(v&&String(v.email||'').toLowerCase()===String(u.email||'').toLowerCase())return true;}catch(e){}
+ try{const j=await workerCall('/status');if(j.ok&&j.verified)return true;}catch(e){}return false;}
+async function getPhone(uid){try{return String((await db.ref('users/'+uid+'/phone').once('value')).val()||'');}catch(e){return null;}}
+async function buyCourse(cid){const c=P.courses.find(x=>x.id===cid);if(!c||c.isFree||!c.active)return;
+ if(!me||!P.user)return openLogin('Course खरीदने के लिए पहले login करें।');
+ if(owned(c))return nav('premium/'+encodeURIComponent(cid));
+ const u=P.user;openM('<div class="form" style="text-align:center"><i class="fas fa-spinner fa-spin" style="font-size:26px;color:var(--p2)"></i><p style="margin-top:10px">थोड़ा रुकें...</p></div>');
+ if(!(await isVerified(u)))return openOtp(cid);
+ const ph=await getPhone(u.uid);if(ph!==null&&!phoneOk(ph))return openPhone(cid);
+ startRzp(c,ph);}
+function openOtp(cid){openM(`<div class="form"><div style="display:flex;align-items:center"><h3 style="flex:1"><i class="fas fa-envelope-circle-check" style="color:var(--p2)"></i> Email verify करें</h3><button class="x" onclick="closeM()">×</button></div>
+ <p style="background:#eff6ff;color:#1e3a8a;padding:9px;border-radius:8px;margin-top:10px;font-size:13px">Course खरीदने से पहले email verify करना ज़रूरी है। <b>${esc(me&&me.email||'')}</b> पर 6 अंक का OTP भेजा जा रहा है (spam folder भी देखें)।</p>
+ <form onsubmit="doOtp(event,'${esc(cid)}')"><label>OTP</label><input id="oC" inputmode="numeric" maxlength="6" required placeholder="6 अंक" autocomplete="one-time-code" style="font-size:20px;letter-spacing:6px;text-align:center">
+ <div class="err" id="oErr"></div><button class="btn" id="oBtn" style="width:100%;justify-content:center;margin-top:14px">Verify</button></form>
+ <p style="text-align:center;margin-top:12px;font-size:13px"><a id="oRe" style="color:var(--p2);cursor:pointer" onclick="sendOtp()">OTP दोबारा भेजें</a></p></div>`);sendOtp();}
+async function sendOtp(){const er=$('oErr');if(!er)return;er.style.color='';er.textContent='OTP भेजा जा रहा है...';
+ try{const j=await workerCall('/send');if(j.ok){er.style.color='#16a34a';er.textContent='OTP भेज दिया गया ✓ Email देखें।';}else er.textContent=j.message||'OTP नहीं भेजा जा सका। थोड़ी देर बाद try करें।';}
+ catch(e){er.textContent='Internet check करें, फिर "OTP दोबारा भेजें" दबाएँ।';}}
+async function doOtp(e,cid){e.preventDefault();const code=$('oC').value.replace(/\D/g,''),er=$('oErr');er.style.color='';if(code.length!==6)return er.textContent='6 अंक का OTP डालें';
+ $('oBtn').disabled=true;try{const j=await workerCall('/verify',{code});if(j.ok&&j.verified){closeM();buyCourse(cid);return;}er.textContent=j.message||'OTP गलत है';}
+ catch(x){er.textContent='Internet check करें';}$('oBtn').disabled=false;}
+function openPhone(cid){openM(`<div class="form"><div style="display:flex;align-items:center"><h3 style="flex:1"><i class="fas fa-mobile-screen" style="color:var(--p2)"></i> Mobile number</h3><button class="x" onclick="closeM()">×</button></div>
+ <p class="m" style="margin-top:8px">आपका mobile number निजी रहता है — सिर्फ़ आपके account के लिए।</p>
+ <form onsubmit="savePhone(event,'${esc(cid)}')"><label>Mobile number (+91)</label><input id="mP" inputmode="numeric" maxlength="14" required placeholder="10 अंक"><div class="err" id="mErr"></div><button class="btn" id="mBtn" style="width:100%;justify-content:center;margin-top:14px">Save करें</button></form></div>`);}
+async function savePhone(e,cid){e.preventDefault();const v=$('mP').value;if(!phoneOk(v))return $('mErr').textContent='सही 10 अंक का mobile number डालें (6–9 से शुरू)';
+ $('mBtn').disabled=true;try{await db.ref('users/'+P.user.uid).update({phone:'+91 '+phoneClean(v),phoneUpdatedAt:Date.now()});closeM();buyCourse(cid);}catch(x){$('mBtn').disabled=false;$('mErr').textContent='Save नहीं हुआ। Internet check करें।';}}
+function loadRzp(){return new Promise((ok,no)=>{if(window.Razorpay)return ok();const s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';s.onload=()=>ok();s.onerror=()=>no(new Error('rzp'));document.head.appendChild(s);});}
+async function startRzp(c,ph){const key=str(P.cfg,'razorpayKeyId');
+ if(!key)return openM(`<div class="form" style="text-align:center"><i class="fas fa-circle-exclamation" style="font-size:36px;color:#f59e0b"></i><p style="margin-top:10px">Payment अभी उपलब्ध नहीं है। थोड़ी देर बाद try करें।</p><button class="btn" style="margin-top:12px" onclick="closeM()">OK</button></div>`);
+ try{await loadRzp();}catch(e){return openM(`<div class="form" style="text-align:center"><p>Payment page load नहीं हुआ। Internet check करके दोबारा try करें।</p><button class="btn" style="margin-top:12px" onclick="closeM()">OK</button></div>`);}
+ closeM();const u=P.user;
+ const rz=new Razorpay({key,amount:Math.round(c.price*100),currency:'INR',name:'Smart Exam Academy',description:c.title.slice(0,250),image:new URL('sea-logo.png',location.href).href,
+  prefill:{email:u.email||'',contact:ph?phoneClean(ph):''},notes:{uid:u.uid,courseId:c.id,course:c.title.slice(0,200)},theme:{color:'#1E40AF'},retry:{enabled:true,max_count:3},
+  handler:r=>unlock(c.id,r&&r.razorpay_payment_id,r)});
+ rz.on('payment.failed',r=>{});rz.open();}
+async function unlock(cid,pid,r){if(!pid)return;openM(`<div class="form" style="text-align:center"><i class="fas fa-spinner fa-spin" style="font-size:30px;color:#16a34a"></i><h3 style="margin:12px 0 4px">Payment सफल ✓</h3><p class="m">Course unlock हो रहा है…</p></div>`);
+ const body={paymentId:pid,courseId:cid};if(r&&r.razorpay_order_id&&r.razorpay_signature){body.orderId=r.razorpay_order_id;body.signature=r.razorpay_signature;}
+ let last=null;
+ for(let i=0;i<3;i++){try{const j=await workerCall('/rzp/verify',body);last=j;if(j.ok){closeM();nav('premium/'+encodeURIComponent(cid));setTimeout(()=>openM(`<div class="form" style="text-align:center"><i class="fas fa-circle-check" style="font-size:44px;color:#16a34a"></i><h3 style="margin:10px 0 6px">Course खुल गया 🎉</h3><p class="m">${j.expiresAt?'Valid till '+esc(fmtD(j.expiresAt)):'Lifetime access'}</p><button class="btn" style="margin-top:14px" onclick="closeM()">पढ़ना शुरू करें</button></div>`),300);return;}
+   if(!/busy|payment_not_captured|razorpay_error|server|not_configured|rate_limited/.test(j.reason||j.error||'')&&j._status<500)break;}catch(e){last=null;}
+  await new Promise(z=>setTimeout(z,5000));}
+ const hard=last&&/amount_mismatch|notes_mismatch|payment_used|currency_mismatch|course_not_found/.test(last.reason||'');
+ openM(`<div class="form" style="text-align:center"><i class="fas ${hard?'fa-circle-exclamation':'fa-clock'}" style="font-size:40px;color:#f59e0b"></i><h3 style="margin:10px 0 6px">Payment हो गया ✓</h3>
+ <p style="font-size:13px;color:var(--mu)">${hard?esc(last.message||'Payment check में दिक्कत आई। WhatsApp support से बात करें।'):'Course कुछ मिनट (लगभग 20 मिनट) में अपने-आप खुल जाएगा। यह page बंद कर सकते हैं।'}</p>
+ <p style="font-size:12px;margin-top:8px">Payment ID: <b>${esc(pid)}</b></p><div style="display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="closeM()">OK</button><a class="btn gy" href="${WA_SUPPORT}" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="color:#25D366"></i> Support</a></div></div>`);}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 </script>
 </body>
