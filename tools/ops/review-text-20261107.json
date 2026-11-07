@@ -1,0 +1,32 @@
+[
+ {
+  "op": "patch",
+  "data": {
+   "paid_courses_v3/-P5TvWZhpaqhlQoi-4_w/features": [
+    "MCQ वीडियो क्लास (18)",
+    "PDF नोट्स उत्तर सहित (10)",
+    "PYQ आधारित MCQ अभ्यास",
+    "Major, Minor व SEC विषय",
+    "ऐप में PDF पढ़ें व डाउनलोड",
+    "AI से पूछें (doubt help)"
+   ],
+   "paid_courses_v3/ba-sem1-complete/features": [
+    "MCQ वीडियो क्लास",
+    "यूनिट वाइज़ PDF नोट्स",
+    "ऑनलाइन MCQ टेस्ट",
+    "Major व Minor विषय",
+    "ऐप में PDF पढ़ें व डाउनलोड",
+    "AI से पूछें (doubt help)"
+   ],
+   "paid_courses_v3/free-ba-sem1/features": [
+    "इकाई 1 के PDF नोट्स",
+    "इकाई 1 के ऑनलाइन टेस्ट",
+    "इकाई 1 के वीडियो",
+    "बिल्कुल मुफ़्त"
+   ],
+   "announcements_v3/-P5dLSR-zDbGpra2aSE7/title": "BA 1st Sem: राजनीति विज्ञान व गृह विज्ञान इकाई 1 अब FREE",
+   "announcements_v3/-P5dLSR-zDbGpra2aSE7/message": "इकाई 1 के वीडियो, PDF नोट्स और ऑनलाइन टेस्ट अब Free Course में बिल्कुल मुफ़्त! सभी इकाइयों के MCQ वीडियो, नोट्स और MCQ टेस्ट के लिए BA 1st Semester Complete Course (₹49) join करें।",
+   "announcements_v3/-P5mAUNWwv1hFmSxh0fY/message": "इतिहास (भारतवर्ष की अवधारणा) और हिंदी (हिंदी साहित्य का इतिहास) के हिंदी व्याख्या वाले वीडियो app के Free Course में देखें।"
+  }
+ }
+]
