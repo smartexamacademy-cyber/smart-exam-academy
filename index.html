@@ -110,6 +110,15 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:10p
 .or{display:flex;align-items:center;gap:10px;color:var(--mu);font-size:12px;margin:12px 0 2px}.or:before,.or:after{content:"";flex:1;height:1px;background:var(--bd)}
 .afgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.af{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px}.af .ic{width:40px;height:40px;border-radius:11px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}.af b{display:block;font-size:15px;margin-bottom:4px}.af p{font-size:12px;color:var(--mu);line-height:1.5}
 .wa.yt{border-color:#fecaca;margin-top:10px}.wa.yt>i{color:#FF0000}.wa.yt .wbtn{background:#FF0000}
+.vbtn{border:0;border-radius:9px;padding:6px 9px;font-weight:800;font-size:11px;display:inline-flex;gap:4px;align-items:center;white-space:nowrap}.vbtn.pdf{background:#fee2e2;color:#dc2626}.vbtn.tst{background:#ede9fe;color:#7c3aed}
+.vwrap{background:#000;position:relative}.vwrap video{display:block;width:100%;max-height:70vh;background:#000}.vnote{font-size:12px;color:var(--mu);padding:6px 16px 0}
+.qz{padding:16px}.qz .qq{font-weight:700;margin:6px 0 10px;line-height:1.5}.qz .op{display:block;width:100%;text-align:left;border:1.5px solid var(--bd);background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:14px}.qz .op.ok{border-color:#16a34a;background:#dcfce7}.qz .op.no{border-color:#dc2626;background:#fee2e2}.qz .ex{background:#f8fafc;border-radius:10px;padding:10px;font-size:13px;margin-top:4px}
+.fhelp{position:fixed;right:16px;bottom:80px;width:58px;height:58px;border-radius:50%;border:0;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;box-shadow:0 6px 18px rgba(124,58,237,.4);z-index:41;cursor:pointer}.fhelp small{font-size:10px;font-weight:800;margin-top:1px}
+.aip{position:fixed;right:12px;bottom:12px;width:min(400px,calc(100vw - 24px));height:min(600px,calc(100vh - 24px));background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.3);z-index:55;display:none;flex-direction:column;overflow:hidden}.aip.on{display:flex}
+.aih{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;padding:12px 14px;display:flex;gap:10px;align-items:center}.aih b{flex:1;font-size:15px}.aih .hb{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}.aih button{border:0;background:rgba(255,255,255,.2);color:#fff;border-radius:50%;width:32px;height:32px}
+.aictx{font-size:12px;color:#7c3aed;background:#f5f3ff;padding:6px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aim{flex:1;overflow:auto;padding:12px;background:#f8fafc}.aimsg{max-width:88%;padding:9px 12px;border-radius:12px;margin-bottom:8px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}.aimsg.u{background:#2563eb;color:#fff;margin-left:auto;border-bottom-right-radius:4px}.aimsg.a{background:#fff;border:1px solid var(--bd);border-bottom-left-radius:4px}.aimsg.e{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}.aimsg .spk{border:0;background:#f5f3ff;color:#7c3aed;border-radius:8px;font-size:12px;padding:3px 8px;margin-top:6px;display:inline-flex;gap:4px;align-items:center}
+.aif{display:flex;gap:6px;padding:10px;border-top:1px solid var(--bd)}.aif input{flex:1;border:1px solid var(--bd);border-radius:20px;padding:10px 14px;font-size:14px;min-width:0}.aif button{border:0;border-radius:50%;width:40px;height:40px;flex:0 0 40px;background:#2563eb;color:#fff}.aif button.mic{background:#f5f3ff;color:#7c3aed}.aif button.mic.on{background:#dc2626;color:#fff}
 @media(max-width:600px){.pdet.slim .pdth.sm{flex:1 1 100%}.feat{grid-template-columns:1fr}}
 </style>
 </head>
@@ -131,6 +140,10 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:10p
  <a href="privacy.html">Privacy Policy</a> · <a href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Channel</a> · <a href="https://youtube.com/@smartexamacademy" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a> · <a href="mailto:sonukumarhark@gmail.com">Contact</a>
 </footer>
 <a class="fwa" href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener" aria-label="WhatsApp Channel"><i class="fab fa-whatsapp"></i></a>
+<button class="fhelp" id="helpBtn" onclick="aiOpen()" aria-label="Help AI"><i class="fas fa-robot"></i><small>Help</small></button>
+<div class="aip" id="aiPanel" role="dialog" aria-label="Help AI"><div class="aih"><span class="hb">Help</span><b>AI शिक्षक · Help</b><button onclick="aiClose()" aria-label="Close">×</button></div>
+ <div class="aictx" id="aiCtx"></div><div class="aim" id="aiMsgs"></div>
+ <form class="aif" onsubmit="event.preventDefault();aiSend()"><button type="button" class="mic" id="aiMic" onclick="aiMic()" aria-label="बोलकर पूछें" style="display:none"><i class="fas fa-microphone"></i></button><input id="aiIn" placeholder="किसी भी भाषा में सवाल पूछें..." autocomplete="off"><button id="aiGo" aria-label="Send"><i class="fas fa-paper-plane"></i></button></form></div>
 <div class="modal" id="modal" onclick="if(event.target===this)closeM()"><div class="mb" id="mBody"></div></div>
 
 <script>
@@ -218,14 +231,15 @@ function vSubject(){
 }
 function vSearch(){const k=q.toLowerCase();const L=visMat().filter(m=>[mTitle(m),m.sub,m.description||m.desc,m.chapterName,m.type].join(' ').toLowerCase().includes(k)).slice(0,100);
  return `<h2 class="t"><i class="fas fa-search" style="color:var(--p2)"></i> "${esc(q)}" के results (${L.length})</h2><div class="sub">&nbsp;</div><div class="chap open"><div class="b">${L.map(m=>matRow(m,true)).join('')||'<div class="empty">कुछ नहीं मिला</div>'}</div></div>`;}
-function matRow(m,showPath){const t=T(m.type),p=acc(m)==='premium';
- return `<div class="mat" onclick="openMat('${m.id}')"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(mTitle(m))}</b><small>${t[0]}${showPath?' · '+esc((m.courseId||m.cat)+' → '+(m.sub||'')):''}${m.date?' · '+esc(m.date):''}</small></div>${p?'<span class="tag prem"><i class="fas fa-crown"></i> Premium</span>':''}<i class="fas fa-chevron-right" style="color:var(--mu)"></i></div>`;}
+function matRow(m,showPath){const t=T(m.type),p=acc(m)==='premium',v=isVidM(m);
+ const vb=v?(String(m.pdf||'').trim().toLowerCase()!=='none'?`<button class="vbtn pdf" onclick="event.stopPropagation();matPdf('${esc(m.id)}')"><i class="fas fa-file-pdf"></i> PDF</button>`:'')+(String(m.testId||m.test||'').trim().toLowerCase()!=='none'?`<button class="vbtn tst" onclick="event.stopPropagation();matTest('${esc(m.id)}')"><i class="fas fa-vial"></i> TEST</button>`:''):'';
+ return `<div class="mat" onclick="openMat('${m.id}')"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(mTitle(m))}</b><small>${t[0]}${showPath?' · '+esc((m.courseId||m.cat)+' → '+(m.sub||'')):''}${m.date?' · '+esc(m.date):''}</small></div>${p?'<span class="tag prem"><i class="fas fa-crown"></i> Premium</span>':''}${vb}${vb?'':'<i class="fas fa-chevron-right" style="color:var(--mu)"></i>'}</div>`;}
 function socialCard(){return `<h2 class="t" style="margin-top:22px"><i class="fas fa-share-nodes" style="color:var(--p2)"></i> Social</h2><div class="sub">नए notes, videos और updates सबसे पहले पाने के लिए जुड़िए।</div>
  <a class="wa" href="https://whatsapp.com/channel/0029Vb8fSh0AYlUR87Elaj2C" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i><div style="flex:1"><b>WhatsApp Channel</b><span>Smart Exam Academy को follow करें</span></div><span class="wbtn">Join</span></a>
  <a class="wa yt" href="https://youtube.com/@smartexamacademy" target="_blank" rel="noopener"><i class="fab fa-youtube"></i><div style="flex:1"><b>YouTube · @SmartExamAcademy</b><span>LNMU BA / B.Sc / B.Com semester classes और competition exam videos</span></div><span class="wbtn">Subscribe</span></a>`;}
-function featuresCard(){const F=[['fa-robot','#7c3aed','AI Study Helper','अपने सवाल हिंदी या English में पूछें — AI teacher step-by-step समझाता है और जवाब हिंदी आवाज़ में सुनाता भी है।'],['fa-circle-play','#E91E63','Video Classes','Subject → इकाई (unit) के हिसाब से सजी video classes, app के अंदर ही देखें।'],['fa-file-pdf','#F44336','PDF Notes','Unit-wise PDF notes, objective / subjective और important questions — app में खोलें और download करें।'],['fa-vial','#ff6d00','Tests & MCQ','हर unit के MCQ tests और quiz — तैयारी जाँचें।'],['fa-book-open','#1d4ed8','Paid Course ₹49','पूरा semester course सिर्फ़ ₹49 में, 10 महीने की validity। पहले Free Demo देखें।']];
- return `<h2 class="t" style="margin-top:22px"><i class="fas fa-star" style="color:#f59e0b"></i> App की खास बातें</h2><div class="sub">Smart Exam Academy app में पढ़ाई के लिए सब कुछ।</div><div class="afgrid">${F.map(f=>`<div class="af"><div class="ic" style="background:${f[1]}"><i class="fas ${f[0]}"></i></div><b>${f[2]}</b><p>${f[3]}</p></div>`).join('')}</div>`;}
-function appCard(){return `<div class="app" style="margin-top:20px"><i class="fas fa-mobile-screen-button" style="font-size:38px"></i><div style="flex:1;min-width:200px"><h3>Smart Exam Academy App डाउनलोड करें</h3><p>Android app PhonePe App Store पर जल्द आ रहा है — वहाँ "Smart Exam Academy" search करें। App में AI study helper (हिंदी आवाज़), PDF notes, tests और video classes मिलते हैं। इसी account से website और app दोनों में login करें।</p></div></div>`;}
+function featuresCard(){const F=[['fa-robot','#7c3aed','Help AI · कई भाषाएँ','हिंदी, English, भोजपुरी, मैथिली या किसी भी भाषा में पूछें — AI teacher उसी भाषा में समझाता है, बोलकर (mic) पूछ सकते हैं और जवाब आवाज़ में सुन सकते हैं।'],['fa-file-circle-check','#0891b2','हर video पर PDF + TEST','हर video के साथ उसके PDF notes और TEST का बटन। Test नहीं है तो AI 5 सवालों का अभ्यास टेस्ट बना देता है।'],['fa-circle-play','#E91E63','Video Classes','Subject → इकाई (unit) के हिसाब से सजी video classes — YouTube और Google Drive दोनों videos app और website पर ही चलते हैं।'],['fa-file-pdf','#F44336','PDF Notes','Unit-wise PDF notes, objective / subjective और important questions — app में खोलें और download करें।'],['fa-vial','#ff6d00','Tests & MCQ','हर unit के MCQ tests और quiz — तैयारी जाँचें।'],['fa-book-open','#1d4ed8','Paid Course ₹49','पूरा semester course सिर्फ़ ₹49 में, 10 महीने की validity। पहले Free Demo देखें।']];
+ return `<h2 class="t" style="margin-top:22px"><i class="fas fa-star" style="color:#f59e0b"></i> App की खास बातें</h2><div class="sub">Smart Exam Academy app (और website) में पढ़ाई के लिए सब कुछ। <a style="color:#7c3aed;font-weight:700;cursor:pointer" onclick="aiOpen()"><i class="fas fa-robot"></i> Help AI से पूछें</a></div><div class="afgrid">${F.map(f=>`<div class="af"><div class="ic" style="background:${f[1]}"><i class="fas ${f[0]}"></i></div><b>${f[2]}</b><p>${f[3]}</p></div>`).join('')}</div>`;}
+function appCard(){return `<div class="app" style="margin-top:20px"><i class="fas fa-mobile-screen-button" style="font-size:38px"></i><div style="flex:1;min-width:200px"><h3>Smart Exam Academy App डाउनलोड करें</h3><p>Android app PhonePe App Store पर जल्द आ रहा है — वहाँ "Smart Exam Academy" search करें। नए version में: Help AI (कई भाषाएँ + आवाज़), हर video पर PDF और TEST, Google Drive videos भी app में चलते हैं। इसी account से website और app दोनों में login करें।</p></div></div>`;}
 
 // ---------- material viewer ----------
 function ytId(u){const m=u.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:null;}
@@ -233,12 +247,19 @@ function driveId(u){const m=u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|
 function openMat(id){const m=S.materials.find(x=>x.id===id);if(!m)return;
  if(acc(m)==='premium'&&!me){return openLogin('यह Premium material है। देखने के लिए login करें।');}
  viewer(mTitle(m),m.url||'',m.type,cName(m.courseId||m.cat)+' → '+(m.sub||'')+(m.chapterName?' → '+m.chapterName:''),m.description||m.desc||'');}
-function viewer(title,u,type,path,desc){const y=ytId(u),d=driveId(u),t=T(type),href=safeUrl(u);let media='';
+function viewer(title,u,type,path,desc){const y=ytId(u),d=driveId(u),t=T(type),href=safeUrl(u);let media='';const isV=type==='Videos'||/\.(mp4|webm|m3u8)(\?|#|$)/i.test(u);
+ AI.last={title,path,kind:isV||y?'video':type};
  if(y)media=`<div class="frame"><iframe src="https://www.youtube.com/embed/${y}" allowfullscreen allow="accelerometer; autoplay; encrypted-media; picture-in-picture"></iframe></div>`;
+ else if(d&&isV)media=`<div class="vwrap" id="vWrap"><video id="vPlay" controls playsinline preload="metadata" controlslist="nodownload" src="https://drive.usercontent.google.com/download?id=${esc(d)}&confirm=t" onerror="vFallback('${esc(d)}')" oncontextmenu="return false"></video></div><div class="vnote" id="vNote">Video load हो रहा है… न चले तो थोड़ा रुकें।</div>`;
  else if(d)media=`<div class="frame doc"><iframe src="https://drive.google.com/file/d/${d}/preview" allow="autoplay"></iframe></div>`;
+ else if(isV&&href)media=`<div class="vwrap" id="vWrap"><video id="vPlay" controls playsinline preload="metadata" controlslist="nodownload" src="${esc(href)}" onerror="vFallback('')" oncontextmenu="return false"></video></div><div class="vnote" id="vNote"></div>`;
  openM(`<div class="mh"><i class="fas ${t[1]}" style="color:${t[2]}"></i><b>${esc(title)}</b><button class="x" onclick="closeM()">×</button></div>${media}
  <div class="mbody"><div style="font-size:13px;color:var(--mu);margin-bottom:8px">${esc(path)}</div>${desc?`<p style="white-space:pre-wrap;margin-bottom:12px">${esc(desc)}</p>`:''}
  ${href?'':'<p class="err">Link उपलब्ध नहीं है।</p>'}<a class="btn" href="${esc(href||'#')}" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> ${y?'YouTube पर खोलें':d?'Drive में खोलें / Download':'Open'}</a></div>`);}
+function vFallback(d){const w=$('vWrap'),n=$('vNote');if(!w||w.dataset.fb)return;w.dataset.fb='1';
+ if(d){w.className='frame';w.innerHTML=`<iframe src="https://drive.google.com/file/d/${esc(d)}/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>`;if(n)n.textContent='Drive player में चल रहा है।';}
+ else if(n){n.innerHTML='<span class="err">यह video यहाँ नहीं चल पाया। नीचे "Open" से खोलें।</span>';}}
+document.addEventListener('loadeddata',e=>{if(e.target&&e.target.id==='vPlay'){const n=$('vNote');if(n)n.textContent='';}},true);
 function openM(h){$('mBody').innerHTML=h;$('modal').style.display='flex';document.body.style.overflow='hidden';}
 function closeM(){$('modal').style.display='none';$('mBody').innerHTML='';document.body.style.overflow='';}
 
@@ -352,7 +373,7 @@ function buildTree(items,metas){const root={children:new Map(),items:[]};let n=0
   kids.forEach(k=>all=all.concat(k.all));node.kids=kids;node.all=all;return node;};
  return fin(root);}
 function loadContent(cid){const c=P.courses.find(x=>x.id===cid);if(!c)return;
- const parse=obj=>{const a=[];Object.entries(obj||{}).forEach(([k,v])=>{if(!v||typeof v!=='object')return;const url=str(v,'url','link');if(!url)return;a.push({id:k,title:str(v,'title','tit')||'Lesson',kind:kindOf(str(v,'type'),url),url,subject:str(v,'subject','sub'),order:Math.floor(num(v.order)||0),pdf:str(v,'pdf','pdfUrl')});});
+ const parse=obj=>{const a=[];Object.entries(obj||{}).forEach(([k,v])=>{if(!v||typeof v!=='object')return;const url=str(v,'url','link');if(!url)return;a.push({id:k,title:str(v,'title','tit')||'Lesson',kind:kindOf(str(v,'type'),url),url,subject:str(v,'subject','sub'),order:Math.floor(num(v.order)||0),pdf:str(v,'pdf','pdfUrl'),testId:str(v,'testId','test')});});
   return a.sort((x,y)=>x.order-y.order||x.title.localeCompare(y.title));};
  if(c.isFree){P.content[cid]={state:'ok',items:parse((P.raw[cid]||{}).content)};return;}
  P.content[cid]={state:'loading',items:[]};
@@ -435,11 +456,13 @@ function vContent(c){const cid=c.id;let s=P.content[cid];if(!s){loadContent(cid)
  const il=(node===tree?tree.items:node.items).map(i=>itemRow(cid,i)).join('');
  return head+upsell+tabs+srch+crumb+`<div class="chap open"><div class="b">${fl}${il}${!fl&&!il?'<div class="empty">इस folder में अभी कुछ नहीं है।</div>':''}</div></div>`;}
 function setTab(cid,t){P.tab[cid]=t;P.fq[cid]='';nav('premium/'+encodeURIComponent(cid));render();}
-function itemRow(cid,i,showPath){const t=KIND[i.kind]||KIND.link;
- return `<div class="mat" onclick="openItem('${esc(cid)}','${esc(i.id)}')"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(i.title)}</b><small>${t[0]}${showPath&&i.subject?' · '+esc(i.subject.replace(/\//g,' › ')):''}</small></div><span class="tag" style="background:${t[2]}1f;color:${t[2]}">${i.kind==='video'?'Watch':i.kind==='test'?'Start':'Open'}</span></div>`;}
+function itemRow(cid,i,showPath){const t=KIND[i.kind]||KIND.link,a=`'${esc(cid)}','${esc(i.id)}'`;
+ const vb=i.kind==='video'?(i.pdf.toLowerCase()!=='none'?`<button class="vbtn pdf" onclick="event.stopPropagation();itemPdf(${a})"><i class="fas fa-file-pdf"></i> PDF</button>`:'')+(i.testId.toLowerCase()!=='none'?`<button class="vbtn tst" onclick="event.stopPropagation();itemTest(${a})"><i class="fas fa-vial"></i> TEST</button>`:''):'';
+ return `<div class="mat" onclick="openItem(${a})"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(i.title)}</b><small>${t[0]}${showPath&&i.subject?' · '+esc(i.subject.replace(/\//g,' › ')):''}</small></div>${vb||`<span class="tag" style="background:${t[2]}1f;color:${t[2]}">${i.kind==='video'?'Watch':i.kind==='test'?'Start':'Open'}</span>`}</div>`;}
 function openItem(cid,iid){const s=P.content[cid];const it=s&&s.items.find(x=>x.id===iid);if(!it)return;const c=P.courses.find(x=>x.id===cid);
  if(!me)return openLogin('पढ़ने के लिए पहले login करें (free है)।');
  viewer(it.title,it.url,it.kind==='video'?'Videos':it.kind==='pdf'?'PDF':it.kind==='test'?'Test':'Link',(c?c.title:'')+(it.subject?' → '+it.subject.replace(/\//g,' → '):''),'');
+ AI.last.course=c?c.title:'';
  if(it.kind==='video'&&safeUrl(it.pdf))$('mBody').querySelector('.mbody').insertAdjacentHTML('beforeend',` <a class="btn gy" style="margin-top:8px" href="${esc(safeUrl(it.pdf))}" target="_blank" rel="noopener"><i class="fas fa-file-pdf" style="color:#F44336"></i> PDF Notes</a>`);}
 
 // ---------- buying: email OTP + mobile check, then Razorpay ----------
@@ -458,7 +481,7 @@ async function buyCourse(cid){const c=P.courses.find(x=>x.id===cid);if(!c||c.isF
  const ph=await getPhone(u.uid);if(ph!==null&&!phoneOk(ph))return openPhone(cid);
  startRzp(c,ph);}
 function openOtp(cid){openM(`<div class="form"><div style="display:flex;align-items:center"><h3 style="flex:1"><i class="fas fa-envelope-circle-check" style="color:var(--p2)"></i> Email verify करें</h3><button class="x" onclick="closeM()">×</button></div>
- <p style="background:#eff6ff;color:#1e3a8a;padding:9px;border-radius:8px;margin-top:10px;font-size:13px">Course खरीदने से पहले email verify करना ज़रूरी है। <b>${esc(me&&me.email||'')}</b> पर 6 अंक का OTP भेजा जा रहा है (spam folder भी देखें)।</p>
+ <p style="background:#eff6ff;color:#1e3a8a;padding:9px;border-radius:8px;margin-top:10px;font-size:13px">${cid?'Course खरीदने':'Help AI से पूछने'} से पहले email verify करना ज़रूरी है। <b>${esc(me&&me.email||'')}</b> पर 6 अंक का OTP भेजा जा रहा है (spam folder भी देखें)।</p>
  <form onsubmit="doOtp(event,'${esc(cid)}')"><label>OTP</label><input id="oC" inputmode="numeric" maxlength="6" required placeholder="6 अंक" autocomplete="one-time-code" style="font-size:20px;letter-spacing:6px;text-align:center">
  <div class="err" id="oErr"></div><button class="btn" id="oBtn" style="width:100%;justify-content:center;margin-top:14px">Verify</button></form>
  <p style="text-align:center;margin-top:12px;font-size:13px"><a id="oRe" style="color:var(--p2);cursor:pointer" onclick="sendOtp()">OTP दोबारा भेजें</a></p></div>`);sendOtp();}
@@ -466,7 +489,7 @@ async function sendOtp(){const er=$('oErr');if(!er)return;er.style.color='';er.t
  try{const j=await workerCall('/send');if(j.ok){er.style.color='#16a34a';er.textContent='OTP भेज दिया गया ✓ Email देखें।';}else er.textContent=j.message||'OTP नहीं भेजा जा सका। थोड़ी देर बाद try करें।';}
  catch(e){er.textContent='Internet check करें, फिर "OTP दोबारा भेजें" दबाएँ।';}}
 async function doOtp(e,cid){e.preventDefault();const code=$('oC').value.replace(/\D/g,''),er=$('oErr');er.style.color='';if(code.length!==6)return er.textContent='6 अंक का OTP डालें';
- $('oBtn').disabled=true;try{const j=await workerCall('/verify',{code});if(j.ok&&j.verified){closeM();buyCourse(cid);return;}er.textContent=j.message||'OTP गलत है';}
+ $('oBtn').disabled=true;try{const j=await workerCall('/verify',{code});if(j.ok&&j.verified){closeM();if(cid)buyCourse(cid);else{AI.verified=true;aiOpen();}return;}er.textContent=j.message||'OTP गलत है';}
  catch(x){er.textContent='Internet check करें';}$('oBtn').disabled=false;}
 function openPhone(cid){openM(`<div class="form"><div style="display:flex;align-items:center"><h3 style="flex:1"><i class="fas fa-mobile-screen" style="color:var(--p2)"></i> Mobile number</h3><button class="x" onclick="closeM()">×</button></div>
  <p class="m" style="margin-top:8px">आपका mobile number निजी रहता है — सिर्फ़ आपके account के लिए।</p>
@@ -492,6 +515,143 @@ async function unlock(cid,pid,r){if(!pid)return;openM(`<div class="form" style="
  openM(`<div class="form" style="text-align:center"><i class="fas ${hard?'fa-circle-exclamation':'fa-clock'}" style="font-size:40px;color:#f59e0b"></i><h3 style="margin:10px 0 6px">Payment हो गया ✓</h3>
  <p style="font-size:13px;color:var(--mu)">${hard?esc(last.message||'Payment check में दिक्कत आई। WhatsApp support से बात करें।'):'Course कुछ मिनट (लगभग 20 मिनट) में अपने-आप खुल जाएगा। यह page बंद कर सकते हैं।'}</p>
  <p style="font-size:12px;margin-top:8px">Payment ID: <b>${esc(pid)}</b></p><div style="display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="closeM()">OK</button><a class="btn gy" href="${WA_SUPPORT}" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="color:#25D366"></i> Support</a></div></div>`);}
+
+// ---------- v1.0.28: PDF + TEST on every video (same matching rules as the app) ----------
+const STOPW=new Set(['pdf','notes','note','video','videos','lecture','class','the','of','and','in','by','नोट्स','वीडियो','का','की','के','में','और','-','|','smart','exam','academy']);
+const toks=s=>new Set(String(s||'').toLowerCase().replace(/[!-\/:-@\[-`{-~।]/g,' ').split(/\s+/).map(x=>x.trim()).filter(x=>x&&!STOPW.has(x)));
+const shared=(a,b)=>{let n=0;b.forEach(x=>{if(a.has(x))n++;});return n;};
+function bestMatch(title,list,tf){if(!list.length)return null;if(list.length===1)return list[0];const t=toks(title);if(!t.size)return null;
+ let best=null,bs=0;list.forEach(x=>{const n=shared(t,toks(tf(x)));if(n>bs){bs=n;best=x;}});return best;}
+const NO_TEST='इस वीडियो का टेस्ट जल्द आएगा।',NO_NOTES='इस वीडियो के नोट्स जल्द आएँगे।';
+function toast(msg){openM(`<div class="form" style="text-align:center"><i class="fas fa-circle-info" style="font-size:34px;color:var(--p2)"></i><p style="margin:12px 0 14px">${esc(msg)}</p><button class="btn" onclick="closeM()">OK</button></div>`);}
+const pathOf=it=>norm(cleanPath(it.subject));
+// course (paid / free) items
+function itemPdf(cid,iid){if(!me)return openLogin('पढ़ने के लिए पहले login करें (free है)।');const s=P.content[cid];const it=s&&s.items.find(x=>x.id===iid);if(!it)return;const c=P.courses.find(x=>x.id===cid);
+ const own=it.pdf.trim();if(own.toLowerCase()==='none')return;
+ const where=(c?c.title:'')+(it.subject?' → '+it.subject.replace(/\//g,' → '):'');
+ if(own&&safeUrl(own))return viewer(it.title+' – PDF',own,'PDF',where,'');
+ const same=s.items.filter(x=>x.kind==='pdf'&&pathOf(x)===pathOf(it)),m=bestMatch(it.title,same,x=>x.title);
+ if(m)return openItem(cid,m.id);
+ if(same.length){P.tab[cid]='notes';P.fq[cid]='';const h='premium/'+enc(cid)+segs(it.subject,metasOf(cid)).map(x=>'/'+enc(x.id)).join('');if(location.hash==='#/'+h)render();else nav(h);return;}
+ toast(NO_NOTES);}
+function testForItem(items,v){const tests=items.filter(x=>x.kind==='test'),own=v.testId.trim();
+ if(own){const hit=items.find(x=>x.id===own)||tests.find(x=>x.url.trim()===own);if(hit)return hit;if(/^https?:\/\//i.test(own))return {id:'',title:v.title+' (Test)',kind:'test',url:own,subject:v.subject};}
+ const same=tests.filter(x=>pathOf(x)===pathOf(v)),m=bestMatch(v.title,same,x=>x.title);if(m)return m;
+ if(!same.length&&tests.length){const t=toks(v.title);if(t.size){let best=null,bs=1;tests.forEach(x=>{const n=shared(t,toks(x.title));if(n>bs){bs=n;best=x;}});if(best)return best;}}
+ return null;}
+function itemTest(cid,iid){if(!me)return openLogin('Test देने के लिए पहले login करें (free है)।');const s=P.content[cid];const v=s&&s.items.find(x=>x.id===iid);if(!v||v.testId.trim().toLowerCase()==='none')return;const c=P.courses.find(x=>x.id===cid);
+ const t=testForItem(s.items,v);
+ if(t&&t.id)return openItem(cid,t.id);
+ if(t)return viewer(t.title,t.url,'Test',(c?c.title:''),'');
+ return aiPractice(v.title,(c?c.title:'')+(v.subject?' › '+v.subject.replace(/\//g,' › '):''));}
+// free materials (materials_v3)
+function isVidM(m){const t=String(m.type||'').toLowerCase();if(['videos','video','lecture'].includes(t))return true;if(t&&t!=='link')return false;const u=String(m.url||'').toLowerCase();return /youtube\.com\/watch|youtu\.be\/|youtube\.com\/shorts/.test(u)||u.endsWith('.mp4');}
+const isQuizM=m=>{const t=String(m.type||'').toLowerCase();return t.includes('quiz')||t==='test'||t==='mocktest';};
+const isNotesM=m=>!isVidM(m)&&!isQuizM(m)&&['notes','note','pdf','books','book','syllabus','document','questionbank','pyq','ebook','e-book','ebooks','e-books'].includes(String(m.type||'').toLowerCase());
+const mChap=m=>m.chapterId||m.chapter||m.chapterName||m.topic||m.unit||'';
+const mFolder=m=>norm(m.subjectId||m.sub)+'|'+norm(mChap(m));
+const inFolder=m=>(m.sub||m.subjectId)&&mChap(m);
+function matPdf(id){const v=S.materials.find(x=>x.id===id);if(!v)return;const own=String(v.pdf||v.pdfUrl||'').trim();if(own.toLowerCase()==='none')return;
+ if(acc(v)==='premium'&&!me)return openLogin('यह Premium material है। देखने के लिए login करें।');
+ if(own&&safeUrl(own))return viewer(mTitle(v)+' – PDF',own,'PDF',cName(v.courseId||v.cat)+' → '+(v.sub||''),'');
+ if(inFolder(v)){const L=visMat().filter(m=>m.url&&isNotesM(m)&&mFolder(m)===mFolder(v));const m=bestMatch(mTitle(v),L,mTitle);if(m)return openMat(m.id);}
+ toast(NO_NOTES);}
+function matTest(id){const v=S.materials.find(x=>x.id===id);if(!v)return;if(String(v.testId||v.test||'').trim().toLowerCase()==='none')return;
+ if(!me)return openLogin('Test देने के लिए पहले login करें (free है)।');
+ if(inFolder(v)){const L=visMat().filter(m=>m.url&&isQuizM(m)&&mFolder(m)===mFolder(v));const m=bestMatch(mTitle(v),L,mTitle);if(m)return openMat(m.id);}
+ return aiPractice(mTitle(v),[v.sub,v.chapterName||v.chapter].filter(Boolean).join(' › '));}
+
+// ---------- AI 5-MCQ practice (same request as app v1.0.28 AiPractice) ----------
+const PRACTICE_SYS="Aap Smart Exam Academy ke AI shikshak hain. Kaam: ek video class ke title aur ikai (unit) ke aadhaar par exam-style abhyas (practice) ke liye theek 5 MCQ banaiye, saral Hindi (Devanagari) mein. Har sawal ke 4 vikalp, sirf ek sahi. Sawal sirf usi topic ke hon jo title/unit se saaf hai; sahi tathya hi likhein, jis tathya ka pakka pata na ho us par sawal na banayein. Har sawal ki 1 line vyakhya (explanation) dein.\nJawab mein SIRF yeh JSON likhein, aur kuch nahi (na ACTION line, na markdown):\n{\"questions\":[{\"q\":\"sawal\",\"options\":[\"A\",\"B\",\"C\",\"D\"],\"answer\":0,\"explanation\":\"...\"}]}\n\"answer\" = sahi vikalp ka index 0-3.";
+const practicePrompt=(t,w)=>'वीडियो का शीर्षक: "'+String(t).slice(0,160)+'"'+(w?'\nविषय / इकाई: '+String(w).slice(0,160):'')+'\nइस वीडियो के टॉपिक पर 5 MCQ का अभ्यास टेस्ट हिंदी में बनाइए (केवल JSON)।';
+function parsePractice(r){const a=r.indexOf('{'),b=r.lastIndexOf('}');if(a<0||b<=a)return [];let o;try{o=JSON.parse(r.slice(a,b+1));}catch(e){return [];}
+ const out=[];(Array.isArray(o.questions)?o.questions:[]).forEach((q,i)=>{if(!q||out.length>=5)return;const text=String(q.q||q.question||'').trim();const list=(Array.isArray(q.options)?q.options:[]).map(x=>String(x).trim()).filter(Boolean);
+  let ans=Number.isInteger(q.answer)?q.answer:-1;if(!(ans>=0&&ans<list.length)){const s=String(q.answer??'').trim();ans=s.length===1&&/[A-Da-d]/.test(s)?s.toUpperCase().charCodeAt(0)-65:list.findIndex(x=>x.toLowerCase()===s.toLowerCase());}
+  if(!text||list.length<2||!(ans>=0&&ans<list.length)||ans>3)return;out.push({q:text.slice(0,500),o:list.slice(0,4).map(x=>x.slice(0,200)),a:ans,e:String(q.explanation||'').trim().slice(0,400)});});return out;}
+const AIQ={};
+async function aiPractice(title,where){if(!P.user)return openLogin('Test देने के लिए पहले login करें (free है)।');
+ openM(`<div class="form" style="text-align:center"><i class="fas fa-spinner fa-spin" style="font-size:28px;color:#7c3aed"></i><h3 style="margin:12px 0 4px">AI अभ्यास टेस्ट बना रहा है…</h3><p class="m">"${esc(String(title).slice(0,80))}" के 5 सवाल · 10–40 सेकंड</p></div>`);
+ let j;try{j=await workerCall('/ai',{system:PRACTICE_SYS,messages:[{role:'user',text:practicePrompt(title,where)}],lang:''});}catch(e){j=null;}
+ if($('modal').style.display==='none')return;
+ if(j&&j._status===403)return toast(AI_VERIFY_MSG);
+ const qs=j&&j.ok?parsePractice(String(j.text||'')):[];
+ if(qs.length<3)return toast(NO_TEST);
+ Object.assign(AIQ,{title:'अभ्यास टेस्ट: '+String(title).slice(0,60),qs,i:0,score:0,picked:-1});qRender();}
+function qRender(){const q=AIQ.qs[AIQ.i],done=AIQ.picked>=0;
+ openM(`<div class="mh"><i class="fas fa-vial" style="color:#7c3aed"></i><b>${esc(AIQ.title)}</b><button class="x" onclick="closeM()">×</button></div><div class="qz"><div class="m">सवाल ${AIQ.i+1} / ${AIQ.qs.length} · AI से बना अभ्यास</div><div class="qq">${esc(q.q)}</div>
+ ${q.o.map((o,k)=>`<button class="op ${done&&k===q.a?'ok':done&&k===AIQ.picked?'no':''}" ${done?'disabled':''} onclick="qPick(${k})">${'ABCD'[k]}. ${esc(o)}</button>`).join('')}
+ ${done&&q.e?`<div class="ex"><b>${AIQ.picked===q.a?'✅ सही':'❌ गलत'}</b> — ${esc(q.e)}</div>`:''}
+ ${done?`<div style="margin-top:12px;text-align:right"><button class="btn" onclick="qNext()">${AIQ.i+1<AIQ.qs.length?'अगला सवाल':'Result देखें'}</button></div>`:''}</div>`);}
+function qPick(k){if(AIQ.picked>=0)return;AIQ.picked=k;if(k===AIQ.qs[AIQ.i].a)AIQ.score++;qRender();}
+function qNext(){if(AIQ.i+1<AIQ.qs.length){AIQ.i++;AIQ.picked=-1;return qRender();}const n=AIQ.qs.length,p=Math.round(AIQ.score*100/n);
+ openM(`<div class="form" style="text-align:center"><i class="fas fa-trophy" style="font-size:40px;color:#f59e0b"></i><h3 style="margin:10px 0 4px">${AIQ.score} / ${n} सही</h3><p class="m">${p>=80?'🎉 बहुत बढ़िया!':p>=60?'👍 अच्छा है, थोड़ा और practice करें।':'📚 और practice की ज़रूरत है।'}</p><button class="btn" style="margin-top:14px" onclick="closeM()">OK</button></div>`);}
+
+// ---------- Help AI (Worker /ai; multilingual; page context; mic on tap; voice) ----------
+const AI={msgs:[],busy:false,last:null,verified:false,rec:null};
+window.addEventListener('hashchange',()=>{AI.last=null;if($('aiPanel').classList.contains('on'))$('aiCtx').textContent='आप देख रहे थे: '+aiCtx().label;});
+const AI_VERIFY_MSG='Help AI सिर्फ़ verified account के लिए है। Google से login करें, या अपना email OTP से verify करें।';
+function aiCtx(){const L=[];let label='';
+ if(route.p){const c=route.pc&&P.courses.find(x=>x.id===route.pc);if(c){L.push('Screen: Course ke andar ('+(c.isFree?'Free Demo':'Paid')+')','Course: '+c.title+(c.semester?' · Sem '+c.semester:''));label=c.title;
+   const s=P.content[c.id];if(route.f.length){L.push('Folder: '+route.f.join(' › '));label+=' › '+route.f[route.f.length-1];}
+   if(s&&s.state==='ok'){const tree=buildTree(s.items,metasOf(c.id));let n=tree;for(const id of route.f){const k=(n.kids||[]).find(x=>x.id===id);if(!k)break;n=k;}
+    const its=(n===tree?tree.items:n.items).slice(0,25);if(its.length)L.push('Is folder mein: '+its.map(i=>'['+i.kind+'] '+i.title.slice(0,70)).join('; '));
+    const kids=(n.kids||[]).slice(0,15);if(kids.length)L.push('Sub-folders: '+kids.map(k=>k.name).join(', '));}}
+  else{L.push('Screen: Paid & Free Courses list');label='Courses list';const a=P.courses.filter(c=>c.active).slice(0,15);if(a.length)L.push('Courses: '+a.map(c=>c.title+(c.isFree?' (FREE)':' (₹'+c.price+')')).join('; '));}}
+ else if(route.s){const s=S.subjects.find(x=>x.id===route.s);L.push('Screen: Subject page','Class/course: '+cName(route.c),'Subject: '+(s?s.name:route.s));label=cName(route.c)+' › '+(s?s.name:'');
+  const ch=visCh().filter(c=>c.subjectId===route.s).slice(0,20);if(ch.length)L.push('Chapters: '+ch.map(c=>c.name).join('; '));}
+ else{L.push('Screen: Home','Course chuna: '+cName(route.c));label='Home · '+cName(route.c);}
+ if(AI.last){L.push('Abhi khola: ['+AI.last.kind+'] '+String(AI.last.title).slice(0,90)+(AI.last.path?' ('+String(AI.last.path).slice(0,90)+')':''));label=String(AI.last.title).slice(0,50);}
+ return {label,text:L.join('\n').slice(0,4000)};}
+function aiSystem(){const c=aiCtx();return 'Smart Exam Academy STUDENT WEBSITE (smartexamacademy-cyber.github.io/smart-exam-academy). Aap website ke Help AI shikshak hain (malik Sonu Kumar ne niyukt kiya).\n'+
+ 'STUDENT: '+(me?me.name:'Student')+'\n'+
+ 'WEBSITE KI JAANKARI: Class 10th/12th/BA/B.Sc/B.Com/Competitive ke free notes, videos, MCQ. Paid course ₹49 (Razorpay se UPI/Card; payment ke turant baad course khulta hai, warna ~20 minute mein). Har course ka Free Demo. Har video ke saath PDF aur TEST button (test na ho to AI 5 sawal ka abhyas test banata hai). Login: Google ya email (wahi account app mein bhi). Android app jald PhonePe App Store par. Support: WhatsApp channel.\n'+
+ 'Is website par ACTION line mat likhiye; sirf saaf jawab dijiye.\n=== STUDENT ABHI YAHAN HAI ===\n'+c.text;}
+function aiOpen(){const p=$('aiPanel');p.classList.add('on');$('helpBtn').style.display='none';const c=aiCtx();$('aiCtx').textContent='आप देख रहे थे: '+c.label;
+ if(!AI.msgs.length)aiPush('a','नमस्ते'+(me?' '+String(me.name||'').split(' ')[0]+' जी':'')+'! 🙏 मैं Smart Exam Academy का Help AI शिक्षक हूँ। हिंदी, English, भोजपुरी, मैथिली — किसी भी भाषा में पढ़ाई या website से जुड़ा सवाल पूछिए।',true);
+ aiDraw();if(window.SpeechRecognition||window.webkitSpeechRecognition)$('aiMic').style.display='';setTimeout(()=>{const i=$('aiIn');if(i)i.focus();},50);}
+function aiClose(){$('aiPanel').classList.remove('on');$('helpBtn').style.display='';aiStopVoice();if(AI.rec){try{AI.rec.abort();}catch(e){}AI.rec=null;}}
+function aiPush(r,t,greet){AI.msgs.push({r,t,greet:!!greet});}
+function aiDraw(){const b=$('aiMsgs');b.innerHTML=AI.msgs.map((m,k)=>`<div class="aimsg ${m.r}">${esc(m.t)}${m.r==='a'?`<br><button class="spk" onclick="aiSpeak(${k})"><i class="fas fa-volume-high"></i> सुनें</button>`:''}${m.act?`<br>${m.act}`:''}</div>`).join('')+(AI.busy?'<div class="aimsg a"><i class="fas fa-ellipsis fa-fade"></i> सोच रहा हूँ…</div>':'');b.scrollTop=b.scrollHeight;}
+async function aiSend(txt){const inp=$('aiIn');const q=String(txt!=null?txt:inp.value).trim();if(!q||AI.busy)return;
+ if(!P.user){aiClose();return openLogin('Help AI से पूछने के लिए पहले login करें (free है)।');}
+ inp.value='';aiStopVoice();aiPush('u',q.slice(0,2000));AI.busy=true;aiDraw();
+ const hist=AI.msgs.filter(m=>(m.r==='u'||m.r==='a')&&!m.greet).slice(-16);while(hist.length&&hist[0].r!=='u')hist.shift();
+ let j=null;try{j=await workerCall('/ai',{system:aiSystem(),messages:hist.map(m=>({role:m.r==='u'?'user':'model',text:m.t})),lang:AI.lang||''});}catch(e){j=null;}
+ AI.busy=false;
+ if(j&&j.ok){const t=String(j.text||'').split('\n').filter(l=>!/^\s*ACTION\s*:/i.test(l)).join('\n').trim();aiPush(t?'a':'e',t||'AI ने खाली जवाब दिया। दोबारा पूछें।');}
+ else if(j&&j._status===403){aiPush('e',AI_VERIFY_MSG);const g=(P.user.providerData||[]).some(x=>x&&x.providerId==='google.com');if(!g)AI.msgs[AI.msgs.length-1].act='<button class="spk" onclick="aiClose();openOtp(\'\')"><i class="fas fa-envelope-circle-check"></i> Email OTP से verify करें</button>';}
+ else if(j&&j._status===401)aiPush('e','Login session खत्म हो गया। दोबारा login करें।');
+ else if(j&&(j.reason==='daily_limit'))aiPush('e','आज के AI सवाल पूरे हो गए। कल फिर पूछें।');
+ else if(j&&j._status===429)aiPush('e','AI अभी busy है। कुछ सेकंड बाद दोबारा पूछें।');
+ else if(j&&j.reason==='ai_disabled')aiPush('e','Help AI अभी बंद है। थोड़ी देर बाद try करें।');
+ else aiPush('e',j?'AI से जवाब नहीं मिला। थोड़ी देर बाद दोबारा पूछें।':'Internet check करें, फिर दोबारा पूछें।');
+ aiDraw();}
+// mic: only when the student taps (no wake listener on the web)
+function aiMic(){const R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R)return;
+ if(AI.rec){try{AI.rec.stop();}catch(e){}return;}
+ if(!P.user){aiClose();return openLogin('Help AI से पूछने के लिए पहले login करें (free है)।');}
+ aiStopVoice();const r=new R();AI.rec=r;r.lang=AI.lang||(navigator.language&&!/^en/i.test(navigator.language)?navigator.language:'hi-IN');r.interimResults=true;r.maxAlternatives=1;
+ const btn=$('aiMic');btn.classList.add('on');let fin='';
+ r.onresult=e=>{let s='';for(let k=0;k<e.results.length;k++){s+=e.results[k][0].transcript;if(e.results[k].isFinal)fin=s;}$('aiIn').value=s;};
+ r.onerror=e=>{if(e.error==='not-allowed'||e.error==='service-not-allowed'){aiPush('e','Microphone की permission नहीं मिली। Browser settings में mic allow करें, या लिखकर पूछें।');aiDraw();}};
+ r.onend=()=>{btn.classList.remove('on');AI.rec=null;const t=(fin||$('aiIn').value||'').trim();if(t)aiSend(t);};
+ try{r.start();}catch(e){btn.classList.remove('on');AI.rec=null;}}
+// voice: browser voice when it has one for the reply's language, else the Worker's cloud voice (/tts)
+function aiLangOf(t){const m=[[/[\u0980-\u09FF]/,'bn'],[/[\u0B80-\u0BFF]/,'ta'],[/[\u0C00-\u0C7F]/,'te'],[/[\u0A80-\u0AFF]/,'gu'],[/[\u0C80-\u0CFF]/,'kn'],[/[\u0D00-\u0D7F]/,'ml'],[/[\u0A00-\u0A7F]/,'pa'],[/[\u0B00-\u0B7F]/,'or'],[/[\u0600-\u06FF]/,'ur'],[/[\u0900-\u097F]/,'hi']];for(const [re,l] of m)if(re.test(t))return l;return 'en';}
+function aiChunks(t){const out=[];String(t).replace(/\s+/g,' ').replace(/([।.!?])\s+/g,'$1\n').split('\n').forEach(s=>{while(s.length>210){out.push(s.slice(0,210));s=s.slice(210);}if(!s)return;if(out.length&&(out[out.length-1]+' '+s).length<=210)out[out.length-1]+=' '+s;else out.push(s);});return out.slice(0,8);}
+let aiAudio=null,aiSpeakId=0;
+function aiStopVoice(){aiSpeakId++;try{speechSynthesis.cancel();}catch(e){}if(aiAudio){try{aiAudio.pause();}catch(e){}aiAudio=null;}}
+async function aiSpeak(k){const m=AI.msgs[k];if(!m)return;aiStopVoice();const id=aiSpeakId,text=m.t.replace(/[*#_`>]/g,''),lang=aiLangOf(text);
+ const vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[];const v=vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lang)&&/in/i.test(x.lang))||vs.find(x=>x.lang&&x.lang.toLowerCase().startsWith(lang));
+ if(v&&window.SpeechSynthesisUtterance){aiChunks(text).forEach(c=>{const u=new SpeechSynthesisUtterance(c);u.voice=v;u.lang=v.lang;u.rate=.95;speechSynthesis.speak(u);});return;}
+ if(!P.user)return;
+ for(const c of aiChunks(text)){if(id!==aiSpeakId)return;try{const u=firebase.auth().currentUser;const tok=await u.getIdToken();
+   const r=await fetch(WORKER+'/tts',{method:'POST',headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify({text:c,lang})});
+   if(r.status===403){aiPush('e',AI_VERIFY_MSG);aiDraw();return;}if(!r.ok)throw 0;const url=URL.createObjectURL(await r.blob());
+   if(id!==aiSpeakId)return;aiAudio=new Audio(url);await new Promise(ok=>{aiAudio.onended=ok;aiAudio.onerror=ok;aiAudio.play().catch(ok);});URL.revokeObjectURL(url);}
+  catch(e){if(id===aiSpeakId){aiPush('e','आवाज़ अभी नहीं चल पाई। जवाब पढ़ लें।');aiDraw();}return;}}}
+try{if(window.speechSynthesis)speechSynthesis.getVoices();}catch(e){}
+
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 </script>
 </body>
