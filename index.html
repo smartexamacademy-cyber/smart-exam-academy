@@ -195,8 +195,9 @@ function render(){
 }
 function annBar(){const L=[...S.ann].filter(a=>a.target!=='course_specific'||a.course===route.c).sort((a,b)=>new Date(b.timestamp||0)-new Date(a.timestamp||0));
  $('annBar').innerHTML=L.length?`<div class="ann" onclick="showAnn()"><div class="in"><i class="fas fa-bullhorn"></i><span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><b>${esc(L[0].title)}:</b> ${esc(L[0].message)}</span>${L.length>1?`<span class="tag prem">+${L.length-1}</span>`:''}</div></div>`:'';}
+function annImg(u){u=safeUrl(u);if(!u)return '';const d=driveId(u);return d?`https://drive.google.com/thumbnail?id=${encodeURIComponent(d)}&sz=w1280`:u;}
 function showAnn(){const L=[...S.ann].sort((a,b)=>new Date(b.timestamp||0)-new Date(a.timestamp||0));
- openM(`<div class="mh"><i class="fas fa-bullhorn" style="color:#f59e0b"></i><b>सूचनाएँ</b><button class="x" onclick="closeM()">×</button></div><div class="mbody">${L.map(a=>`<div style="padding:10px 0;border-bottom:1px solid var(--bd)"><b>${esc(a.title)}</b> ${a.priority==='urgent'?'<span class="tag" style="background:#fee2e2;color:#991b1b">Urgent</span>':''}<p style="margin-top:4px;white-space:pre-wrap">${esc(a.message)}</p><small style="color:var(--mu)">${a.timestamp?new Date(a.timestamp).toLocaleDateString('en-IN'):''}</small></div>`).join('')}</div>`);}
+ openM(`<div class="mh"><i class="fas fa-bullhorn" style="color:#f59e0b"></i><b>सूचनाएँ</b><button class="x" onclick="closeM()">×</button></div><div class="mbody">${L.map(a=>`<div style="padding:10px 0;border-bottom:1px solid var(--bd)"><b>${esc(a.title)}</b> ${a.priority==='urgent'?'<span class="tag" style="background:#fee2e2;color:#991b1b">Urgent</span>':''}<p style="margin-top:4px;white-space:pre-wrap">${esc(a.message)}</p>${annImg(a.image)?`<img src="${esc(annImg(a.image))}" alt="" loading="lazy" style="width:100%;border-radius:10px;margin-top:8px" onerror="this.remove()">`:''}<small style="color:var(--mu)">${a.timestamp?new Date(a.timestamp).toLocaleDateString('en-IN'):''}</small></div>`).join('')}</div>`);}
 
 function courseBar(){return `<div class="card"><div class="lbl"><i class="fas fa-layer-group"></i> Course / Class चुनें</div><div class="courses">${COURSES.filter(c=>c.id!=='SOCIAL_LINKS'||visMat().some(m=>(m.courseId||m.cat)==='SOCIAL_LINKS')).map(c=>`<button class="${c.id===route.c?'on':''}" onclick="localStorage.setItem('sea_course','${c.id}');nav('${c.id}')"><i class="fas ${c.ic}"></i> ${c.name}</button>`).join('')}<button class="pbtn" onclick="nav('premium')"><i class="fas fa-book-open"></i> Paid & Free Courses</button></div></div>`;}
 function vHome(){
@@ -255,7 +256,21 @@ function viewer(title,u,type,path,desc){const y=ytId(u),d=driveId(u),t=T(type),h
  else if(isV&&href)media=`<div class="vwrap" id="vWrap"><video id="vPlay" controls playsinline preload="metadata" controlslist="nodownload" src="${esc(href)}" onerror="vFallback('')" oncontextmenu="return false"></video></div><div class="vnote" id="vNote"></div>`;
  openM(`<div class="mh"><i class="fas ${t[1]}" style="color:${t[2]}"></i><b>${esc(title)}</b><button class="x" onclick="closeM()">×</button></div>${media}
  <div class="mbody"><div style="font-size:13px;color:var(--mu);margin-bottom:8px">${esc(path)}</div>${desc?`<p style="white-space:pre-wrap;margin-bottom:12px">${esc(desc)}</p>`:''}
- ${href?'':'<p class="err">Link उपलब्ध नहीं है।</p>'}<a class="btn" href="${esc(href||'#')}" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> ${y?'YouTube पर खोलें':d?'Drive में खोलें / Download':'Open'}</a></div>`);}
+ ${href?'':'<p class="err">Link उपलब्ध नहीं है।</p>'}${(!isV&&!y&&href)?pdfMenu(href,d,title):`<a class="btn" href="${esc(href||'#')}" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> ${y?'YouTube पर खोलें':d?'Drive में खोलें':'Open'}</a>`}</div>`);}
+let VPAID=false;
+// v1.0.31: PDF menu — Export / Download / Open In Web / Close; paid PDFs only Download + Close
+function pdfMenu(href,d,title){const dl=d?`https://drive.google.com/uc?export=download&id=${encodeURIComponent(d)}`:href,web=d?`https://drive.google.com/file/d/${encodeURIComponent(d)}/view`:href;
+ return `<div class="cbtn" style="flex-wrap:wrap">${VPAID?'':`<button class="btn gy" onclick="pdfShare('${esc(web)}')"><i class="fas fa-share-nodes"></i> Export</button>`}<a class="btn" href="${esc(dl)}" target="_blank" rel="noopener"><i class="fas fa-download"></i> Download</a>${VPAID?'':`<a class="btn gy" href="${esc(web)}" target="_blank" rel="noopener"><i class="fas fa-globe"></i> Open In Web</a>`}<button class="btn gy" onclick="closeM()"><i class="fas fa-xmark"></i> Close</button></div>`;}
+function pdfShare(u){const t=(AI.last&&AI.last.title)||'Smart Exam Academy';if(navigator.share)navigator.share({title:t,url:u}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(u).then(()=>alert('Link copy हो गया ✓'),()=>{});}
+// v1.0.31: Rate this teacher — users/{uid}/teacherRatings/{videoKey} (same as app)
+function rateRow(key,title,teacher){const u=firebase.auth().currentUser,b=$('mBody')&&$('mBody').querySelector('.mbody');if(!b)return;
+ const k=String(key||'').replace(/[.#$\[\]\/]/g,'_').slice(0,120)||'general';
+ b.insertAdjacentHTML('beforeend',`<div class="card" id="rateBox" style="margin-top:12px"><b id="rateLbl">Rate this teacher</b><div id="rateStars" style="font-size:26px;color:#f5b301;cursor:pointer;margin-top:4px">${[1,2,3,4,5].map(i=>`<i class="far fa-star" data-s="${i}" style="margin-right:6px"></i>`).join('')}</div></div>`);
+ const paint=n=>{document.querySelectorAll('#rateStars i').forEach(e=>{e.className=(+e.dataset.s<=n?'fas':'far')+' fa-star';});const l=$('rateLbl');if(l)l.textContent=n?`आपकी rating: ${n}/5 — धन्यवाद!`:'Rate this teacher';};
+ const ref=u?db.ref('users/'+u.uid+'/teacherRatings/'+k):null;if(ref)ref.child('stars').once('value').then(s=>paint(+s.val()||0),()=>{});
+ $('rateStars').onclick=e=>{const n=+(e.target.dataset&&e.target.dataset.s);if(!n)return;if(!ref)return openLogin('Rating के लिए login करें।');paint(n);
+  ref.set({stars:n,video:String(title||'').slice(0,150),teacher:String(teacher||'').slice(0,80),at:Date.now()}).catch(()=>toast('Rating save नहीं हुई, दोबारा try करें'));};}
+
 function vFallback(d){const w=$('vWrap'),n=$('vNote');if(!w||w.dataset.fb)return;w.dataset.fb='1';
  if(d){w.className='frame';w.innerHTML=`<iframe src="https://drive.google.com/file/d/${esc(d)}/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>`;if(n)n.textContent='Drive player में चल रहा है।';}
  else if(n){n.innerHTML='<span class="err">यह video यहाँ नहीं चल पाया। नीचे "Open" से खोलें।</span>';}}
@@ -356,7 +371,7 @@ const enc=s=>encodeURIComponent(s).replace(/'/g,'%27');
 const norm=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
 const keyFor=s=>(norm(s)||'general').replace(/[.#$\[\]\/]/g,'_');
 const cleanPath=s=>String(s||'').trim().replace(/\s*\/\s*/g,'/').replace(/^\/+|\/+$/g,'').trim();
-function kindOf(t,u){t=norm(t);if(['video','videos','lecture','live','live class','liveclass'].includes(t))return 'video';if(['pdf','notes','file'].includes(t))return 'pdf';if(['test','quiz','mcq','quiztest'].includes(t))return 'test';
+function kindOf(t,u){t=norm(t);if(['live','live class','liveclass'].includes(t))return 'live';if(['video','videos','lecture'].includes(t))return 'video';if(['pdf','notes','file'].includes(t))return 'pdf';if(['test','quiz','mcq','quiztest'].includes(t))return 'test';
  u=String(u||'').toLowerCase();return /youtube\.com|youtu\.be|\.mp4/.test(u)?'video':/\.pdf|drive\.google\.com/.test(u)?'pdf':'link';}
 function metasOf(cid){const f=(P.raw[cid]||{}).folders||{};return Object.entries(f).filter(([k,v])=>v&&typeof v==='object').map(([k,v])=>({key:k,name:str(v,'name'),order:num(v.order),parent:str(v,'parent')}));}
 function segs(subject,metas){let rest=cleanPath(subject).replace(/\s+/g,' ');const G=[{id:'general',name:'General',meta:null}];if(!rest)return G;
@@ -395,7 +410,8 @@ function ccard(c){const own=owned(c),d=demoFor(c),go=`nav('premium/'+encodeURICo
 function shareCourse(cid){const u=location.origin+location.pathname+'#/premium/'+encodeURIComponent(cid);const c=P.courses.find(x=>x.id===cid);
  if(navigator.share)navigator.share({title:c?c.title:'Smart Exam Academy',url:u}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(u).then(()=>alert('Link copy हो गया ✓'),()=>{});}
 const paidList=()=>P.courses.filter(c=>!c.isFree&&c.active);
-const freeList=()=>P.courses.filter(c=>c.isFree&&c.active&&!(()=>{const p=paidFor(c);return p&&owned(p);})());
+// v1.0.31: a free demo that matches a paid course opens only from that course's Demo button
+const freeList=()=>P.courses.filter(c=>c.isFree&&c.active&&!paidFor(c));
 function premiumStrip(){if(!P.loaded||P.denied)return '';const L=paidList(),F=freeList();if(!L.length&&!F.length)return '';
  return `${L.length?`<div class="pstrip" onclick="nav('premium')"><i class="fas fa-book-open"></i><div style="flex:1"><b>Paid Course · ${rs(Math.min(...L.map(c=>c.price)))} में पूरा कोर्स</b><span>${L.length} course${L.length>1?'s':''} · Video classes, PDF notes और tests · Validity ${validityLabel(L[0].validityDays).toLowerCase()}</span></div><span class="wbtn">देखें <i class="fas fa-arrow-right"></i></span></div>`:''}
  ${F.length?`<div class="pstrip fr" onclick="nav('premium');setTimeout(()=>{const x=document.getElementById('freeSec');if(x)x.scrollIntoView({behavior:'smooth'});},120)"><i class="fas fa-gift"></i><div style="flex:1"><b>Free Demo Courses · मुफ़्त</b><span>${F.length} free course${F.length>1?'s':''} · हर paper की पहली इकाई मुफ़्त</span></div><span class="wbtn">खोलें <i class="fas fa-arrow-right"></i></span></div>`:''}`;}
@@ -429,7 +445,7 @@ function vCourse(cid){const back=`<div class="crumb"><a onclick="nav('')"><i cla
  <div class="card"><div class="lbl"><i class="fas fa-list"></i> इस course में क्या है</div><div class="pcc">${counts(c)||'Videos, PDF notes और tests'}</div><p class="m" style="margin-top:10px"><i class="fas fa-lock"></i> Content locked — खरीदने के बाद यहीं folder-wise खुलेगा।${d?' तब तक <a style="color:var(--p2);cursor:pointer" onclick="nav(\'premium/\'+encodeURIComponent(\''+esc(d.id)+'\'))">Free Demo</a> देखें।':''}</p></div>`;}
 function counts(c){const a=[];if(c.videoCount)a.push(`<span><i class="fas fa-circle-play"></i> ${c.videoCount} Videos</span>`);if(c.pdfCount)a.push(`<span><i class="fas fa-file-pdf"></i> ${c.pdfCount} PDFs</span>`);if(c.testCount)a.push(`<span><i class="fas fa-vial"></i> ${c.testCount} Tests</span>`);if(!a.length&&c.itemCount)a.push(`<span><i class="fas fa-layer-group"></i> ${c.itemCount} items</span>`);return a.join('');}
 
-const KIND={video:['Video','fa-circle-play','#E91E63'],pdf:['PDF','fa-file-pdf','#F44336'],test:['Test','fa-vial','#ff6d00'],link:['Link','fa-link','#607D8B']};
+const KIND={live:['Live','fa-tower-broadcast','#dc2626'],video:['Video','fa-circle-play','#E91E63'],pdf:['PDF','fa-file-pdf','#F44336'],test:['Test','fa-vial','#ff6d00'],link:['Link','fa-link','#607D8B']};
 function vContent(c){const cid=c.id;let s=P.content[cid];if(!s){loadContent(cid);s=P.content[cid];}
  const e=P.enr[cid],up=paidFor(c);
  const head=`<div class="pdet slim">${thumb(c,'pdth sm')}<div class="pdb"><h2 class="t">${esc(c.title)}</h2>${meta(c)?`<div class="sub" style="margin-bottom:4px">${meta(c)}</div>`:''}${c.isFree?'<div class="valid free"><i class="fas fa-gift"></i> FREE DEMO</div>':`<div class="m" style="color:#166534"><i class="fas fa-circle-check"></i> Purchased · ${e&&e.expiresAt?'Expiry Date: '+esc(fmtD(e.expiresAt)):'Lifetime access'}</div>`}</div></div>`;
@@ -437,18 +453,20 @@ function vContent(c){const cid=c.id;let s=P.content[cid];if(!s){loadContent(cid)
  if(!s||s.state==='loading')return head+'<div class="empty"><i class="fas fa-spinner fa-spin"></i> Content load हो रहा है...</div>';
  if(s.state!=='ok')return head+`<div class="empty">${s.state==='denied'?'Access verify नहीं हुआ। थोड़ी देर बाद दोबारा try करें।':'Content load नहीं हुआ। Internet check करें।'}<br><button class="btn gy" style="margin-top:10px" onclick="delete P.content['${esc(cid)}'];render()">दोबारा try करें</button></div>`;
  const items=s.items,hasT=items.some(i=>i.kind==='test'),hasN=items.some(i=>i.kind==='pdf');
+ const hasL=items.some(i=>i.kind==='live');
  let tab=P.tab[cid]||'content';if((tab==='test'&&!hasT)||(tab==='notes'&&!hasN))tab='content';
- const tabs=`<div class="pills"><button class="${tab==='content'?'on':''}" onclick="setTab('${esc(cid)}','content')">Content</button>${hasT?`<button class="${tab==='test'?'on':''}" onclick="setTab('${esc(cid)}','test')">Test</button>`:''}${hasN?`<button class="${tab==='notes'?'on':''}" onclick="setTab('${esc(cid)}','notes')">Notes</button>`:''}</div>`;
+ const tabs=`<div class="pills"><button class="${tab==='live'?'on':''}" onclick="setTab('${esc(cid)}','live')">${hasL?'🔴 ':''}Live</button><button class="${tab==='content'?'on':''}" onclick="setTab('${esc(cid)}','content')">Content</button>${hasT?`<button class="${tab==='test'?'on':''}" onclick="setTab('${esc(cid)}','test')">Test</button>`:''}${hasN?`<button class="${tab==='notes'?'on':''}" onclick="setTab('${esc(cid)}','notes')">Notes</button>`:''}</div>`;
  const fq=P.fq[cid]||'';
  const srch=`<div class="msearch" style="display:block"><i class="fas fa-search"></i><input id="fq" placeholder="इस course में खोजें..." value="${esc(fq)}" oninput="P.fq['${esc(cid)}']=this.value;clearTimeout(window._ft);window._ft=setTimeout(()=>{render();const i=$('fq');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}},300)"></div>`;
- const pool=items.filter(i=>tab==='content'||(tab==='test'?i.kind==='test':i.kind==='pdf'));
+ const pool=items.filter(i=>tab==='live'?i.kind==='live':tab==='content'?i.kind!=='live':(tab==='test'?i.kind==='test':i.kind==='pdf'));
+ if(tab==='live'&&!fq.trim()&&!pool.length)return head+upsell+tabs+'<div class="empty"><b>अभी कोई live class नहीं</b><br>Teacher live शुरू करेंगे तो class यहीं दिखेगी।</div>';
  if(!items.length)return head+upsell+'<div class="empty"><b>Content जल्द आ रहा है</b><br>Teacher अभी videos/PDF upload कर रहे हैं।</div>';
  if(fq.trim()){const k=norm(fq);const L=pool.filter(i=>norm(i.title+' '+i.subject).includes(k)).slice(0,150);
   return head+upsell+tabs+srch+`<div class="chap open"><div class="b">${L.map(i=>itemRow(cid,i,true)).join('')||'<div class="empty">कुछ नहीं मिला</div>'}</div></div>`;}
  const tree=buildTree(pool,metasOf(cid));let node=tree;const path=[];
  for(const id of route.f){const n=(node.kids||[]).find(k=>k.id===id);if(!n)break;path.push(n);node=n;}
  const base='premium/'+enc(cid);let acc=base;
- const crumb=`<div class="crumb"><a onclick="nav('${base}')"><i class="fas fa-folder-open"></i> ${esc(tab==='content'?'Content':tab==='test'?'Test':'Notes')}</a>${path.map((p,i)=>{acc+='/'+enc(p.id);return ` <i class="fas fa-chevron-right" style="font-size:10px"></i> ${i===path.length-1?esc(p.name):`<a onclick="nav('${acc}')">${esc(p.name)}</a>`}`;}).join('')}</div>`;
+ const crumb=`<div class="crumb"><a onclick="nav('${base}')"><i class="fas fa-folder-open"></i> ${esc(tab==='live'?'Live':tab==='content'?'Content':tab==='test'?'Test':'Notes')}</a>${path.map((p,i)=>{acc+='/'+enc(p.id);return ` <i class="fas fa-chevron-right" style="font-size:10px"></i> ${i===path.length-1?esc(p.name):`<a onclick="nav('${acc}')">${esc(p.name)}</a>`}`;}).join('')}</div>`;
  const here=base+route.f.slice(0,path.length).map(x=>'/'+enc(x)).join('');
  const fl=(node.kids||[]).map(k=>{const v=k.all.filter(i=>i.kind==='video').length,f=k.all.filter(i=>i.kind==='pdf'||i.kind==='link').length,t=k.all.filter(i=>i.kind==='test').length;
   const lab=[k.kids.length?k.kids.length+' folder'+(k.kids.length>1?'s':''):'',v?v+' video'+(v>1?'s':''):'',f?f+' file'+(f>1?'s':''):'',t?t+' test'+(t>1?'s':''):''].filter(Boolean).join(' | ');
@@ -458,11 +476,12 @@ function vContent(c){const cid=c.id;let s=P.content[cid];if(!s){loadContent(cid)
 function setTab(cid,t){P.tab[cid]=t;P.fq[cid]='';nav('premium/'+encodeURIComponent(cid));render();}
 function itemRow(cid,i,showPath){const t=KIND[i.kind]||KIND.link,a=`'${esc(cid)}','${esc(i.id)}'`;
  const vb=i.kind==='video'?(i.pdf.toLowerCase()!=='none'?`<button class="vbtn pdf" onclick="event.stopPropagation();itemPdf(${a})"><i class="fas fa-file-pdf"></i> PDF</button>`:'')+(i.testId.toLowerCase()!=='none'?`<button class="vbtn tst" onclick="event.stopPropagation();itemTest(${a})"><i class="fas fa-vial"></i> TEST</button>`:''):'';
- return `<div class="mat" onclick="openItem(${a})"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(i.title)}</b><small>${t[0]}${showPath&&i.subject?' · '+esc(i.subject.replace(/\//g,' › ')):''}</small></div>${vb||`<span class="tag" style="background:${t[2]}1f;color:${t[2]}">${i.kind==='video'?'Watch':i.kind==='test'?'Start':'Open'}</span>`}</div>`;}
+ return `<div class="mat" onclick="openItem(${a})"><div class="ic" style="background:${t[2]}1f;color:${t[2]}"><i class="fas ${t[1]}"></i></div><div class="tt"><b>${esc(i.title)}</b><small>${t[0]}${showPath&&i.subject?' · '+esc(i.subject.replace(/\//g,' › ')):''}</small></div>${vb||`<span class="tag" style="background:${t[2]}1f;color:${t[2]}">${i.kind==='live'?'Join':i.kind==='video'?'Watch':i.kind==='test'?'Start':'Open'}</span>`}</div>`;}
 function openItem(cid,iid){const s=P.content[cid];const it=s&&s.items.find(x=>x.id===iid);if(!it)return;const c=P.courses.find(x=>x.id===cid);
  if(!me)return openLogin('पढ़ने के लिए पहले login करें (free है)।');
- viewer(it.title,it.url,it.kind==='video'?'Videos':it.kind==='pdf'?'PDF':it.kind==='test'?'Test':'Link',(c?c.title:'')+(it.subject?' → '+it.subject.replace(/\//g,' → '):''),'');
- AI.last.course=c?c.title:'';
+ VPAID=!!(c&&!c.isFree);viewer(it.title,it.url,(it.kind==='video'||it.kind==='live')?'Videos':it.kind==='pdf'?'PDF':it.kind==='test'?'Test':'Link',(c?c.title:'')+(it.subject?' → '+it.subject.replace(/\//g,' → '):''),'');
+ AI.last.course=c?c.title:'';VPAID=false;
+ if(it.kind==='video'||it.kind==='live')rateRow(it.id||('url_'+it.url),it.title,str(it,'teacher'));
  if(it.kind==='video'&&safeUrl(it.pdf))$('mBody').querySelector('.mbody').insertAdjacentHTML('beforeend',` <a class="btn gy" style="margin-top:8px" href="${esc(safeUrl(it.pdf))}" target="_blank" rel="noopener"><i class="fas fa-file-pdf" style="color:#F44336"></i> PDF Notes</a>`);}
 
 // ---------- buying: email OTP + mobile check, then Razorpay ----------
