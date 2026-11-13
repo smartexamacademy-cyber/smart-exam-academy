@@ -77,7 +77,8 @@ h2.t{font-size:20px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .fwa{position:fixed;right:16px;bottom:16px;width:54px;height:54px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:40}
 footer{text-align:center;color:var(--mu);font-size:12px;padding:24px 14px;line-height:1.8}footer a{color:var(--p2)}
 #loading{text-align:center;padding:60px;color:var(--mu)}
-@media(max-width:700px){.search{display:none}.hero{padding:20px 16px}.hero img{display:none}.hero h1{font-size:20px}.brand small{display:none}.hbtn span{display:none}}
+@media(max-width:700px){.search{display:none}.hero{padding:20px 16px}.hero img{display:none}.hero h1{font-size:20px}.brand small{display:none}.hbtn span{display:none}.hbtn .dlt{font-weight:800}
+.appbar{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,#16a34a,#22c55e);color:#fff;border-radius:14px;padding:12px 14px;margin:0 0 12px;text-decoration:none;box-shadow:0 2px 8px rgba(22,163,74,.25)}.appbar i.big{font-size:26px}.appbar b{display:block;font-size:15px}.appbar small{opacity:.9;font-size:12px}.appbar .go{margin-left:auto;background:#fff;color:#16a34a;border-radius:20px;padding:7px 12px;font-weight:800;font-size:13px;white-space:nowrap}}
 .msearch{display:none;margin-bottom:12px;position:relative}.msearch i{position:absolute;left:12px;top:12px;color:var(--mu)}.msearch input{padding-left:34px;border-radius:22px}
 @media(max-width:700px){.msearch{display:block}}
 .hbtn.prm{background:#fbbf24;color:#78350f}
@@ -127,13 +128,14 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--mu);margin:10p
  <div class="brand" onclick="nav('')"><img src="sea-logo.png" alt=""><div><b>Smart Exam Academy</b><small>Student Learning Portal</small></div></div>
  <div class="search"><i class="fas fa-search"></i><input id="q1" placeholder="Notes, videos, MCQ खोजें..." oninput="onSearch(this.value)"></div>
  <div style="flex:1" class="sp"></div>
- <a class="hbtn" href="download/" style="background:#22c55e;color:#fff"><i class="fas fa-download"></i><span>App Download</span></a>
+ <a class="hbtn dl" href="download/" style="background:#22c55e;color:#fff"><i class="fas fa-download"></i><b class="dlt">App</b><span>Download</span></a>
  <button class="hbtn prm" onclick="nav('premium')"><i class="fas fa-book-open"></i><span>Paid Course</span></button>
  <button class="hbtn" id="userBtn" onclick="userClick()"><i class="fas fa-user"></i><span>Student Login</span></button>
 </div></header>
 <div id="annBar"></div>
 <div class="wrap">
  <div class="msearch"><i class="fas fa-search"></i><input id="q2" placeholder="Notes, videos, MCQ खोजें..." oninput="onSearch(this.value)"></div>
+ <a class="appbar" href="download/"><i class="fab fa-android big"></i><div><b>Smart Exam Academy App</b><small>Android app download करें (APK)</small></div><span class="go"><i class="fas fa-download"></i> Download</span></a>
  <div id="view"><div id="loading"><i class="fas fa-spinner fa-spin" style="font-size:28px"></i><p style="margin-top:10px">Loading...</p></div></div>
 </div>
 <footer>
