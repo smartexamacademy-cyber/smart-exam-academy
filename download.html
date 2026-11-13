@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Exam Academy App Download (APK)</title>
+<meta name="description" content="Smart Exam Academy का Android app (APK) यहाँ से download करें — videos, PDF notes, tests, paid course.">
+<meta property="og:title" content="Smart Exam Academy App Download">
+<meta property="og:description" content="Android app (APK) — एक tap में download करें।">
+<meta property="og:image" content="https://smartexamacademy-cyber.github.io/smart-exam-academy/sea-logo.png">
+<link rel="icon" href="https://smartexamacademy-cyber.github.io/smart-exam-academy/sea-logo.png">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif;background:linear-gradient(160deg,#1e3a8a,#7c3aed);min-height:100vh;color:#1f2937;display:flex;align-items:center;justify-content:center;padding:18px}
+.c{background:#fff;border-radius:22px;max-width:430px;width:100%;padding:28px 22px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.c img{width:96px;height:96px;border-radius:22px;box-shadow:0 6px 18px rgba(29,78,216,.25)}
+h1{font-size:22px;margin:14px 0 4px}.v{color:#6b7280;font-size:13px;margin-bottom:18px}
+.dl{display:flex;gap:10px;align-items:center;justify-content:center;background:linear-gradient(90deg,#16a34a,#22c55e);color:#fff;text-decoration:none;font-weight:800;font-size:18px;padding:16px;border-radius:14px;animation:p 1.6s ease-in-out infinite}
+@keyframes p{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(34,197,94,.5)}50%{transform:scale(1.03);box-shadow:0 0 0 12px rgba(34,197,94,0)}}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:20px 0;text-align:left;font-size:13px}
+.f div{background:#f4f6fb;border-radius:10px;padding:9px}.f i{color:#2563eb;margin-right:5px}
+.s{text-align:left;font-size:13px;line-height:1.6;background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:12px}
+.s b{color:#92400e}.s ol{padding-left:18px}
+.lk{display:block;margin-top:16px;color:#2563eb;font-weight:600;font-size:14px;text-decoration:none}
+.sh{margin-top:10px;background:#25D366;color:#fff;border:0;border-radius:12px;padding:11px;width:100%;font-weight:700;font-size:14px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="c">
+ <img src="https://smartexamacademy-cyber.github.io/smart-exam-academy/sea-logo.png" alt="Smart Exam Academy">
+ <h1>Smart Exam Academy</h1>
+ <div class="v" id="ver">Android App · latest version</div>
+ <a class="dl" id="dl" href="https://smartexamacademy-cyber.github.io/smart-exam-academy/app/smart-exam-academy-v1.0.37.apk" download><i class="fas fa-download"></i> App Download करें</a>
+ <div class="f">
+  <div><i class="fas fa-circle-play"></i>Video Classes</div><div><i class="fas fa-file-pdf"></i>PDF Notes</div>
+  <div><i class="fas fa-vial"></i>Tests & MCQ</div><div><i class="fas fa-robot"></i>AI शिक्षक</div>
+ </div>
+ <div class="s"><b>Install कैसे करें:</b>
+  <ol><li>ऊपर का हरा button दबाएँ, APK download होगी।</li>
+  <li>Download पूरा होने पर file खोलें।</li>
+  <li>"Allow from this source" पूछे तो चालू करें।</li>
+  <li><b>Install</b> दबाएँ, फिर <b>Open</b>।</li></ol>
+  पुराना app है तो data नहीं हटेगा, नया version ऊपर install हो जाएगा।</div>
+ <button class="sh" onclick="share()"><i class="fab fa-whatsapp"></i> दोस्तों को link भेजें</button>
+ <a class="lk" href="https://smartexamacademy-cyber.github.io/smart-exam-academy/"><i class="fas fa-globe"></i> Website खोलें</a>
+</div>
+<script>
+// latest version + link come from the same setting the app's Update button uses (Admin → App Update)
+fetch('https://smart-exam-academy-b7101-default-rtdb.firebaseio.com/app_config_v3/update.json').then(r=>r.json()).then(u=>{
+ if(!u)return;const url=(u.updateUrl||'').trim();
+ if(/^https:\/\/.+\.apk(\?.*)?$/i.test(url))document.getElementById('dl').href=url;
+ if(u.latestVersionName)document.getElementById('ver').textContent='Android App · Version '+u.latestVersionName;
+}).catch(()=>{});
+function share(){const t='Smart Exam Academy app download करें: '+location.href.split('#')[0];
+ if(navigator.share)navigator.share({title:'Smart Exam Academy App',text:t}).catch(()=>{});else location.href='https://wa.me/?text='+encodeURIComponent(t);}
+</script>
+</body>
+</html>
